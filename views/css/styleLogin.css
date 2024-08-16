@@ -1,0 +1,114 @@
+.fondo {
+  background-color: rgb(220, 220, 220);
+}
+
+.centro-contenedor-login{
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100vh !important;
+  opacity: 90%;
+}
+
+.menu-login { 
+  position: center;
+  padding-top: auto;
+  padding: 7px !important;
+}
+
+.bordes-login {
+  border-radius: 25px !important;
+  background-color:whitesmoke !important;
+}
+
+.login-bg{
+  background-color: rgb(245, 245, 245) !important;
+}
+
+.btncolor{
+  display: block !important;
+  padding: 5px !important;
+  background: #092755 !important;
+  color: white !important;
+  border-bottom: 1px solid transparent !important;
+  text-align: center;
+  width: 100% !important;
+}
+
+.card-login-bg{
+  background-color: rgb(245, 245, 245) !important;
+  border-color: aliceblue !important;
+}
+
+.img-login {
+  vertical-align: middle;
+  display: inherit;
+  margin: -20px auto;
+  width: 80%;
+}
+
+.centro-contenedor-registro{
+  padding: 10% 0% 10% 0%;
+}
+
+.centro-contenedor-reservar{
+  padding: 10% 0% 10% 0%;
+  margin-top: 50px;
+}
+
+.menu-registro { 
+  position: center;
+  padding: 7px !important;
+}
+
+.bordes-registro {
+  border-radius: 25px !important;
+  background-color:whitesmoke !important;
+}
+
+
+
+.footer-bg{
+  background-color: #0A2655 !important;
+}
+
+.color-nav{
+  background-color: #092755 !important;
+}
+
+.img-navbar{
+  width: 150px;
+}
+
+.navbar{
+  --bs-navbar-padding-y: 0.0rem !important;
+}
+
+.color-toggle {
+  color: white !important;
+
+}
+
+.contenedor-reserva {
+  padding: 15% !important;
+  background-image: url(../assets/img/HSJ\ Fachada.jpg);
+  background-position: center !important;
+}
+
+.resdeldia{
+  margin-top: 6rem!important;
+}
+
+.card-reserva {
+  border-radius: 25px !important;
+  opacity: 95% !important;
+}
+
+.card-reservar {
+  border-radius: 25px !important;
+  opacity: 95% !important;
+}
+
+.card-registro {
+  border-radius: 25px !important;
+  opacity: 95% !important;
+}
