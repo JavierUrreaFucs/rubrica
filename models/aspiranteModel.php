@@ -19,7 +19,7 @@ require_once ("../db/conexionRubrica.php");
    /**
    * Insetar datos del estudiante con consulta preparada
    */
-  public function insertarEstudiante($nombre_estudiante, $tipoDoc, $cedula, $colegio, $universidad, $titulo, $anioGrado, $ICFES, $ciudad, $programa_id_programa, $obsMadre, $obsPadre, $trabaja, $lugarTrabajo, $estudioAdicional) {
+  public function insertarEstudiante($nombre_estudiante, $tipoDoc, $cedula, $colegio, $universidad, $titulo, $anioGrado, $ICFES, $ciudad, $estudioAdicional, $programa_id_programa, $obsMadre, $obsPadre, $trabaja, $lugarTrabajo) {
 
     $sql = "INSERT INTO estudiante( nombre_estudiante, tipoDoc, cedula, colegio, universidad, titulo, anioGrado, ICFES, ciudad, estudioAdicional, programa_id_programa, obsMadre, obsPadre, trabaja, lugarTrabajo) VALUES ( :nombre_estudiante, :tipoDoc, :cedula, :colegio, :universidad, :titulo, :anioGrado, :ICFES, :ciudad, :estudioAdicional, :programa_id_programa, :obsMadre, :obsPadre, :trabaja, :lugarTrabajo)";
 
@@ -79,9 +79,26 @@ require_once ("../db/conexionRubrica.php");
       // Retornar los resultados
       return $resultados;
     } catch (PDOException $e) {
-      die("Error en la ejecución de la consulta: data0002".$e->getMessage());
+      die("Error en la ejecución de la consulta: data0003".$e->getMessage());
     }
 
+  }
+
+  /**
+   * Lista de aspirantes
+   */
+  public function selectAspirante(){
+    $sql ="SELECT a.id_estudiante, a.nombre_estudiante, a.tipoDoc, a.cedula, a.programa_id_programa, b.nombre_programa, a.rubrica FROM estudiante a INNER JOIN programa b ON a.programa_id_programa = b.id_programa ORDER BY id_estudiante ASC";
+    try {
+      $stmt = $this->conexRubrica->prepare($sql);
+      $stmt->execute();
+      // Obtener todos los resultados como un array asociativo
+      $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      // Retornar los resultados
+      return $resultados;
+    } catch (PDOException $e) {
+      die("Error en la ejecución de la consulta: data0004".$e->getMessage());
+    }
   }
 
  }

@@ -10,6 +10,7 @@ if(isset($_POST['enviarEntrevista'])) {
 	$documentoEstudiante = $_POST['documentoEstudiante'];
 	$puntajeICFES = $_POST['puntajeICFES'];
 	$fechaEntrevista = $_POST['fechaEntrevista'];
+  $idEstudiante = $_POST['idEstudiante'];
 
 	// Obtener calificación
   $historiaAcademica = $_POST['historiaAcademica'];
@@ -36,12 +37,21 @@ if(isset($_POST['enviarEntrevista'])) {
   $notaICFES = new Puntaje();
   $calificaICFES = $notaICFES->getScore($puntajeICFES);
 
+  $totalCalifica = (($calificaICFES*0.40) + ($totalEntre*0.60));
+
+  try {
   // Enviar los datos a la base de rubrica
   $insertarRubrica = new Rubrica();
-  $insertarRubrica->insertarRubrica($documentoEstudiante, $puntajeICFES, $fechaEntrevista, $historiaAcademica, $aspectosVocacionales, $conocimientoFUCS, $inAcGenerales, $expOralComprension, $comportamiento, $observacion, $calificaICFES, $totalEntre);
-
+  $insertarRubrica->insertarRubrica($idEstudiante, $documentoEstudiante, $puntajeICFES, $fechaEntrevista, $historiaAcademica, $aspectosVocacionales, $conocimientoFUCS, $inAcGenerales, $expOralComprension, $comportamiento, $observacion, $calificaICFES, $totalEntre, $totalCalifica);
+  $insertarRubrica->updateRubricaEstudiante($documentoEstudiante);
   echo '<script>
     window.alert("La entrevista del aspirante se guardo correctamente.");
-    window.location.href = "../views/rubrica.php";
+    window.location.href = "../views/aspirantes.php";
   </script>';
+
+  } catch (Exception $e) {
+    echo '<script>alert("Ocurrió un error al guardar la entrevista: ' . $e->getMessage() . '");</script>';
+  }
+
 }
+

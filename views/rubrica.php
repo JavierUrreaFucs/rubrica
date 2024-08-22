@@ -1,5 +1,14 @@
-<?php require_once("../models/rubricaModel.php"); ?>
-<?php include "header.php"; ?>
+<?php
+require_once("../models/rubricaModel.php");
+
+session_start();
+
+if (isset($_GET['realizarRubrica'])) {
+  $docNum = $_GET['cedula'];
+}
+
+include "header.php";
+?>
 
 <main>
 
@@ -11,37 +20,37 @@
         <p>A continuación encontrará los datos del estudiante</p>
       </div>
       <div class="col-12 col-md-8">
-        <form class="row g-3">
-          <?php 
-            /*$verAspirante = new Rubrica();
-            $resultadoAspitante = $verAspirante->datosEstudiantes($documento,1);
-            foreach($resultadoAspitante as $rowResult) {*/
+        <div class="row g-3">
+          <?php
+            $verAspirante = new Rubrica();
+            $resultadoAspitante = $verAspirante->datosEstudiantes($docNum);
+            foreach($resultadoAspitante as $rowResult) {
           ?>
           <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="ejemplo@fucsalud.edu.co" readonly>
+            <label for="NombreAspirante" class="form-label"><strong>Nombre del aspirante:</strong></label>
+            <p><?php echo $rowResult['nombre_estudiante'] ?></p>
           </div>
           <div class="col-12 col-md-6">
-            <label for="inputAddress" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" readonly>
+            <label for="programas" class="form-label"><strong>Programa:</strong></label>
+            <p><?php echo $rowResult['nombre_programa'] ?></p>
           </div>
           <div class="col-12 col-md-6">
-            <label for="inputAddress2" class="form-label">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" readonly>
+            <label for="institución" class="form-label"><strong>Institución</strong></label>
+            <?php if(empty($rowResult['colegio'])) { ?>
+              <p><?php echo $rowResult['universidad'] ?></p>
+            <?php } else { ?>
+              <p><?php echo $rowResult['colegio'] ?></p>
+            <?php } ?>
           </div>
           <div class="col-12 col-md-6">
-            <label for="inputCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="inputCity readonly">
+            <label for="inputCity" class="form-label"><strong>Estudios</strong></label>
+            <?php if(empty($rowResult['estudioAdicional'])) { ?>
+              <p><?php echo $rowResult['titulo'] ?></p>
+            <?php } else { ?>
+              <p><?php echo $rowResult['estudioAdicional'] ?></p>
+            <?php } ?>
           </div>
-          <div class="col-12 col-md-6">
-            <label for="inputZip" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="inputZip" readonly>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </div>
-          <?php //} ?>
-        </form>
+        </div>
       </div>
     </div>
     <hr class="hr">
@@ -51,28 +60,29 @@
         <h2 class="h2">Calificación</h2>
         <p>Asigne la calificación correspondiente según lo visto en la entrevista al aspirante</p>
       </div>
-      <hr>
       <div class="row px-3 py-3">
         <div class="col-12 col-md-10 mx-auto">
         <form class="row g-3 py-2" method="POST" action="../controllers/rubricaController.php">
           <!-- datos -->
           <div class="col-md-4">
             <label for="documentoEstudiante" class="form-label fw-semibold">Número de documento</label>
-            <input type="number" class="form-control" id="documentoEstudiante" name="documentoEstudiante">
+            <input type="number" class="form-control" id="documentoEstudiante" name="documentoEstudiante" value="<?php echo $docNum ?>" readonly>
           </div>
           <div class="col-md-4">
             <label for="puntajeICFES" class="form-label fw-semibold">Puntaje ICFES</label>
-            <input type="number" class="form-control" id="puntajeICFES" name="puntajeICFES">
+            <input type="number" class="form-control" id="puntajeICFES" name="puntajeICFES" value="<?php echo $rowResult['ICFES'] ?>" readonly>
           </div>
+          <input type="hidden" name="idEstudiante" value="<?php echo $rowResult['id_estudiante'] ?>" readonly>
+          <?php } ?>
           <div class="col-md-4">
             <label for="fechaEntrevista" class="form-label fw-semibold">Fecha de la entrevista</label>
-            <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista">
+            <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista" required>
           </div>
           <hr class="hr">
           <!-- Calificación -->
           <div class="col-12 col-md-6 p-2">
-            <label for="historiaAcademica" class="form-label fw-semibold">1. Historia académica: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal1">&#x1F6C8;</span>
-            <select id="historiaAcademica" class="form-select" name="historiaAcademica">
+            <label for="historiaAcademica" class="form-label fw-semibold">1. Historia académica: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal1"><i class="bi bi-question-circle"></i></span>
+            <select id="historiaAcademica" class="form-select" name="historiaAcademica" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>
@@ -82,8 +92,8 @@
             </select>
           </div>
           <div class="col-12 col-md-6 p-2">
-            <label for="aspectosVocacionales" class="form-label fw-semibold">2. Aspectos vocacionales: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal2">&#x1F6C8;</span>
-            <select id="aspectosVocacionales" class="form-select" name="aspectosVocacionales">
+            <label for="aspectosVocacionales" class="form-label fw-semibold">2. Aspectos vocacionales: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal2"><i class="bi bi-question-circle"></i></span>
+            <select id="aspectosVocacionales" class="form-select" name="aspectosVocacionales" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>
@@ -93,8 +103,8 @@
             </select>
           </div>
           <div class="col-12 col-md-6 p-2">
-            <label for="conocimientoFUCS" class="form-label fw-semibold">3. Conocimiento de la FUCS: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal3">&#x1F6C8;</span>
-            <select id="conocimientoFUCS" class="form-select" name="conocimientoFUCS">
+            <label for="conocimientoFUCS" class="form-label fw-semibold">3. Conocimiento de la FUCS: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal3"><i class="bi bi-question-circle"></i></span>
+            <select id="conocimientoFUCS" class="form-select" name="conocimientoFUCS" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>
@@ -104,8 +114,8 @@
             </select>
           </div>
           <div class="col-12 col-md-6 p-2">
-            <label for="inAcGenerales" class="form-label fw-semibold">4. Intereses y actividades generales: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal4">&#x1F6C8;</span>
-            <select id="inAcGenerales" class="form-select" name="inAcGenerales">
+            <label for="inAcGenerales" class="form-label fw-semibold">4. Intereses y actividades generales: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal4"><i class="bi bi-question-circle"></i></span>
+            <select id="inAcGenerales" class="form-select" name="inAcGenerales" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>
@@ -115,8 +125,8 @@
             </select>
           </div>
           <div class="col-12 col-md-6 p-2">
-            <label for="expOralComprension" class="form-label fw-semibold">5. Expresión oral y procesos de comprensión: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal5">&#x1F6C8;</span>
-            <select id="expOralComprension" class="form-select" name="expOralComprension">
+            <label for="expOralComprension" class="form-label fw-semibold">5. Expresión oral y procesos de comprensión: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal5"><i class="bi bi-question-circle"></i></span>
+            <select id="expOralComprension" class="form-select" name="expOralComprension" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>
@@ -126,8 +136,8 @@
             </select>
           </div>
           <div class="col-12 col-md-6 p-2">
-            <label for="comportamiento" class="form-label fw-semibold">6. Comportamiento durante la entrevista: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal6">&#x1F6C8;</span>
-            <select id="comportamiento" class="form-select" name="comportamiento">
+            <label for="comportamiento" class="form-label fw-semibold">6. Comportamiento durante la entrevista: </label><span class="help-icon" data-bs-toggle="modal" data-bs-target="#Modal6"><i class="bi bi-question-circle"></i></span>
+            <select id="comportamiento" class="form-select" name="comportamiento" required>
               <option selected>Seleccione una calificación</option>
               <option value="5">5. Muy bueno</option>
               <option value="4">4. Bueno</option>

@@ -1,12 +1,5 @@
-* {
-  padding: 0px;
-  margin: 0px;
-}
 
-body {
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
+
 
 main {
   padding: 15px 15px;
@@ -49,7 +42,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 #sidebarMenu {
-  min-width: 250px;
+  min-width: 15%;
   background-color: darkgrey;
   height: 100vh;
 }
@@ -96,6 +89,17 @@ input[type=number] { -moz-appearance:textfield; }
 }
 /* end footer */
 
+/* tables */
+.th-font {
+  font-size: 14px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* end tables */
+
 @media screen and (min-width: 768px) {
-  
+  .container-desktop {
+    width: 85%;
+  }
 }

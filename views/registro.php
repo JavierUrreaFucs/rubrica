@@ -9,7 +9,7 @@ include "header.php";
     <div class="col-12 p-3">
       <h2 class="h2">Programa de interes</h2>
     </div>
-    <form action="../controllers/aspiranteController.php" method="post">
+    <form action="../controllers/aspiranteController.php" method="POST">
       <div class="row px-3 py-3">
         <div class="container">
           <div class="row">
@@ -30,7 +30,7 @@ include "header.php";
             <div class="col-12 col-md-6">
               <label for="programa" class="form-label">Programa<strong class="text-danger">*</strong></label>
               <select class="form-select" name="programa" id="programa" required>
-                <option value="" selected>Selecione una opción...</option>
+                <option value="">Selecione una opción...</option>
 
               </select>
             </div>
@@ -75,7 +75,17 @@ include "header.php";
                   </div>
                   <div class="col-12 col-md-3">
                     <label for="anioGrado" class="form-label">Año de graduación</label>
-                    <input type="date" class="form-control" id="anioGrado" name="anioGrado" placeholder="Seleccione una fecha">
+                    <select class="form-select" id="anioGrado" name="anioGrado">
+                      <option value="">Seleccione una opción...</option>
+                      <?php 
+                      $currentYear = date("Y");
+                      $startYear = 1945; // Puedes ajustar este valor según tus necesidades
+                    
+                      for ($year = $currentYear; $year >= $startYear; $year--) {
+                          echo "<option value='$year'>$year</option>";
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="col-12 col-md-3">
                     <label for="ICFES" class="form-label">Puntaje ICFES</label>
@@ -104,7 +114,7 @@ include "header.php";
                   <div class="col-12 col-md-4 py-2">
                     <label for="trabaja" class="form-label">¿Labora actualmente?</label>
                     <select class="form-control" id="trabaja" name="trabaja">
-                      <option value="SI" selected>Selecione una opción...</option>
+                      <option value="" selected>Selecione una opción...</option>
                       <option value="SI">Sí</option>
                       <option value="No">No</option>
                     </select>
@@ -149,10 +159,12 @@ include "header.php";
         <p>Descargue la <a href="">plantilla</a> y cargue el documento de Excel con los datos del aspirante.</p>
       </div>
       <div class="col-12 col-md-6">
-        <div class="input-group">
-          <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Upload">
-          <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon">Button</button>
-        </div>
+        <form action="../controllers/procesar_excel.php" method="post" enctype="multipart/form-data">
+          <div class="input-group">
+            <input type="file" class="form-control" name="archivo_excel">
+            <input class="btn btn-outline-primary" type="submit" value="Subir archivo">
+          </div>
+        </form>
       </div>
     </div>
 
