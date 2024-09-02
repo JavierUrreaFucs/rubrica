@@ -32,7 +32,7 @@
             </div>
             <div class="card-body">
               <!-- Formulario de inicio de sesión -->
-              <form action="../controllers/controlador_sesiones.php" method="POST">
+              <form action="../controllers/loginController.php" method="POST">
                 <div class="form-group p-2 g-col-6">
                   <label for="user">Nombre de usuario:</label>
                   <input type="text" class="form-control" name="user" placeholder="Correo institucional" required>
@@ -48,10 +48,8 @@
                 <div class="row">
                   <div class="col-md-6 p-3">
                     <button type="submit" name="acceder" class="btn btn-primary btn-block btncolor">Iniciar
-                      sesión</button>
-                  </div>
-                  <div class="col-md-6 p-3">
-                    <a class="btn btn-primary  btncolor" href="registro.php">Registrese</a>
+                      sesión
+                    </button>
                   </div>
                 </div>
               </form>

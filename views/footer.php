@@ -1,5 +1,7 @@
 
-    <footer class="footer">Pie de página</footer>
+    <footer class="footer">
+      <span class="text-light">Sistema Rubrica de Calificaciones | Copyright <i class="bi bi-c-circle"></i> <?php echo date('Y')?> | Desarrollado por la DDT</span>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 

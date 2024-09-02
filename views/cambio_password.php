@@ -2,7 +2,7 @@
   session_start();
   if (isset($_SESSION['correo'])) {
     // El usuario ya ha iniciado sesión, redirige a la página principal u otra página
-    header('Location: ../view/reservar.php');
+    header('Location: ../views/estudiantes.php');
     exit();
   }
 ?>
@@ -12,8 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <title>Rutas FUCS | Recuperar contraseña</title>
-  <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="css/styleLogin.css" rel="stylesheet">
 </head>
 <body>
   <main>
@@ -34,14 +34,12 @@
                   <input type="email" name="correo2" class="form-control p-2" placeholder="Vuelve a escribir el correo electrónico" required="">
                 </div>
                 <div class="row">
-                <div class="row">
-                  <div class="col-md-6 p-2">
+                  <div class="d-grid col-md-6">
                     <button type="submit" class="btn btn-block  btn-primary btncolor" name="registrar">Recuperar</button>
                   </div>
-                  <div class="col-md-6 p-2">
-                    <button type="button" class="btn btn-warning botonamarillo" onclick="goBack()">Atras</button>
+                  <div class="d-grid col-md-6">
+                    <button type="button" class="btn btn-block btn-warning botonamarillo" onclick="goBack()">Atras</button>
                   </div>
-                </div>
                 </div>
               </form>
             </div>

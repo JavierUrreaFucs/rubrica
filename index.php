@@ -1,3 +1,3 @@
-<?php
-  header("Location: http://localhost/rubrica");
+<?php 
+  header("Location: ../views/login.php");
 ?>

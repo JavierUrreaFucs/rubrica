@@ -6,7 +6,7 @@ if ($_SESSION['correo'] != '') {
     echo '<script>document.location.href="login.php" </script>';
 }else{
   
-  echo '<script>document.location.href="reservar.php" </script>';
+  echo '<script>document.location.href="aspirantes.php" </script>';
 	
 }
 

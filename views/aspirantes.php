@@ -6,20 +6,20 @@ include "header.php";
 ?>
 
 <main>
-<section>
-    <div class="container bg-white rounded py-2">
-      <h1 class="h1">Lista de estudiantes</h1>
+  <section>
+    <div class="container-fluid bg-white rounded py-2 px-3 layaout-user">
+      <h1 class="h1">Lista de Aspirantes</h1>
       <hr>
       <div class="py-3 p-md-3">
         <form method="POST" action="">
           <div class="row">
             <div class="col-6 col-md-4">
-              <label for="fecha_inicio">Fecha de inicio:</label>
-              <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
-            </div>
-            <div class="col-6 col-md-4">
-              <label for="fecha_fin">Fecha de fin:</label>
-              <input type="date" class="form-control" id="fecha_fin"  name="fecha_fin">
+              <label for="fecha_inicio">Estado:</label>
+              <select class="form-select" name="estado">
+                <option value="">Seleccione una opción</option>
+                <option value="0">Realizar entrevista</option>
+                <option value="1">Ver rubrica</option>
+              </select>
             </div>
             <div class="col-6 col-md-2">
               <input type="submit" class="btn btn-outline-primary mt-4" name="filtrar" value="Filtrar">
@@ -41,54 +41,62 @@ include "header.php";
               </tr>
             </thead>
             <tbody>
-            <?php 
-            // filtrar tabla por fechas de reservas
+              <?php
+              // filtrar tabla por fechas de reservas
               $vistaAspirante = new Aspirante();
               $resAspirante = $vistaAspirante->selectAspirante();
               // Verificar si se enviaron fechas desde el formulario
               /*if(isset($_POST["filtra-reserva"])){
-                $fechaInicio = date("Y-m-d", strtotime($_POST['fecha_inicio']));
-                $fechaFin = date("Y-m-d", strtotime($_POST['fecha_fin']));
-                $horarioFiltro = $_POST['filtra_hora'];
-                if ((!empty($fechaInicio) && !empty($fechaFin)) || (!empty($horarioFiltro))) {
+                if ((!empty($_POST[''])) || (!empty($_POST['']))) {
                   $resReserva = $vistaUsuario->verReservasFiltradas($fechaInicio, $fechaFin, $horarioFiltro);
                 } else {
                   // Si no se enviaron fechas, mostrar todas las reservas
                   $resReserva = $vistaUsuario->verReservas(1);
                 }
               }*/
-              
+
               foreach ($resAspirante as $rowAspirante) {
-            ?>
-              <tr>
-                <td class="th-font"><?php echo $rowAspirante['id_estudiante'] ?></td>
-                <td class="th-font"><?php echo $rowAspirante['nombre_estudiante'] ?></td>
-                <td class="th-font"><?php echo $rowAspirante['tipoDoc'] ?></td>
-                <td class="th-font"><?php echo $rowAspirante['cedula'] ?></td>
-                <td class="th-font"><?php echo $rowAspirante['nombre_programa'] ?></td>
-                <td class="th-font">
-                  <?php 
-                    if ( $rowAspirante['rubrica'] == 0){
-                  ?>
-                      <form action="rubrica.php" method="GET">
-                        <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
-                        <div class="d-grid gap-2">
-                          <input type="submit" class="btn btn-warning btn-sm" name="realizarRubrica" value="Realizar entrevista">
-                        </div>
-                      </form>
-                  <?php  } else { ?>
+              ?>
+                <tr>
+                  <td class="th-font"><?php echo $rowAspirante['id_estudiante'] ?></td>
+                  <td class="th-font"><?php echo $rowAspirante['nombre_estudiante'] ?></td>
+                  <td class="th-font"><?php echo $rowAspirante['tipoDoc'] ?></td>
+                  <td class="th-font"><?php echo $rowAspirante['cedula'] ?></td>
+                  <td class="th-font"><?php echo $rowAspirante['nombre_programa'] ?></td>
+                  <td class="th-font">
+                    <?php
+                    if ($rowAspirante['rubrica'] == 0) {
+                    ?>
+                        <form action="rubrica.php" method="GET">
+                          <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
+                          <div class="d-grid gap-2">
+                            <input type="submit" class="btn btn-warning btn-sm" name="realizarRubrica" value="Realizar entrevista">
+                          </div>
+                        </form>
+                    <?php  } else if ($rowAspirante['rubrica'] == 1) { ?>
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <form action="rubrica.php" method="GET">
+                          <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
+                          <button type="submit" class="btn btn-primary btn-sm" name="realizarRubrica">Realizar entrevista</button>
+                        </form>
+                        <form action="verRubrica.php" method="GET">
+                          <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
+                          <button type="submit" class="btn btn-success btn-sm" name="verRubrica">Ver Rubrica</button>
+                        </form>
+                      </div>
+                    <?php } else { ?>
                       <form action="verRubrica.php" method="GET">
                         <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
                         <div class="d-grid gap-2">
-                          <input type="submit" class="btn btn-success btn-sm" name="verRubrica" value="Ver rubrica">
+                          <button type="submit" class="btn btn-success btn-sm" name="verRubrica">Ver Rubrica</button>
                         </div>
                       </form>
-                  <?php } ?>
-                </td>
-                
-              </tr>
-              
-              <?php }?>
+                    <?php } ?>
+                  </td>
+
+                </tr>
+
+              <?php } ?>
             </tbody>
           </table>
         </div>

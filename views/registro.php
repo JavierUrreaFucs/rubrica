@@ -4,7 +4,7 @@ include "header.php";
 ?>
 
 <main>
-  <div class="container bg-white rounded">
+  <div class="container-fluid bg-white rounded layaout-user">
     <!-- Fila 0 -->
     <div class="col-12 p-3">
       <h2 class="h2">Programa de interes</h2>
@@ -39,7 +39,7 @@ include "header.php";
       </div>
       <hr>
       <!-- Fila 1 -->
-      <div style="display:none" id="contenido">
+      
         <div class="col-12 p-3">
           <h2 class="h2">Datos del aspirante</h2>
         </div>
@@ -67,6 +67,7 @@ include "header.php";
                   <input type="number" class="form-control" id="cedula" name="cedula" placeholder="123456789" required>
                 </div>
               </div>
+            <div style="display:none" id="contenido">
               <div style="display: block;" id="pre">
                 <div class="row py-2">
                   <div class="col-12 col-md-6">
@@ -141,10 +142,9 @@ include "header.php";
                 <label for="ciudad" class="form-label">Ciudad de residencia</label>
                 <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="">
               </div>
-              <div class="col-12 pt-3">
+              <div class="col-12 py-3">
                 <button type="submit" name="insertarEstudiante" class="btn btn-primary">Enviar</button>
               </div>
-
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ include "header.php";
     <div class="row px-3 py-3">
       <div class="col-12 p-3">
         <h2 class="h2">Cargue masivo</h2>
-        <p>Descargue la <a href="">plantilla</a> y cargue el documento de Excel con los datos del aspirante.</p>
+        <p>Descargue la <a href="assets/plantilla/estudiante_rubrica_pruebas.xlsx" download="Plantilla_aspirantes_masivo.xlsx">plantilla</a> y cargue el documento de Excel con los datos del aspirante.</p>
       </div>
       <div class="col-12 col-md-6">
         <form action="../controllers/procesar_excel.php" method="post" enctype="multipart/form-data">

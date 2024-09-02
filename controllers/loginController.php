@@ -2,7 +2,7 @@
 error_reporting(E_ERROR);
 session_start();
 
-require_once("../models/modelo_sesiones.php");
+require_once("../models/loginModel.php");
 
 //iniciar sesión
 if(isset($_POST['acceder'])){
@@ -26,7 +26,6 @@ if(isset($_POST['acceder'])){
       $correo = $keySession['correo'];
       $idLogin = $keySession['id_login'];
       $nombreLogin = $keySession['nombre_login'];
-      $loginIdTipo = $keySession['id_tipo_login'];
     }
 
     $fechaUltima = new Consultas();
@@ -35,7 +34,6 @@ if(isset($_POST['acceder'])){
     $_SESSION['correo'] = $correo;
     $_SESSION['id_login'] = $idLogin;
     $_SESSION['nombre_login'] = $nombreLogin;
-    $_SESSION['id_tipo_login'] = $loginIdTipo;
 
     // Advertencia: si se elimina el echo no iniciara sesión
     echo '<script>

@@ -22,6 +22,42 @@ class Consultas
 
   // Validacion de usurio en el login
   public function validarUsuario($user, $password)
+{
+    // Consulta para el login con placeholders
+    $query = "SELECT * FROM login WHERE correo = :user AND activo_login = 1";
+    
+    // Prepara la consulta
+    $stmt = $this->conex->prepare($query);
+    
+    // Bind de parámetros para evitar inyección SQL
+    $stmt->bindParam(':user', $user);
+    
+    // Ejecuta la consulta
+    $stmt->execute();
+    
+    // Obtén el número de filas
+    $totalRows_query_usuario = $stmt->rowCount();
+    
+    if ($totalRows_query_usuario == 0) {
+        echo '<script language="javascript">alert("Credenciales incorrectas");</script>';
+        echo '<script>document.location.href="../views/login.php"</script>';
+    } else {
+        // Recorrer los resultados
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $this->resultado[] = $row;
+            // Compara la contraseña insertada con la encriptada en la base de datos
+            if (password_verify($password, $row['password'])) {
+                return $this->resultado;
+            } else {
+                echo '<script>
+                    alert("¡Contraseña incorrecta! Inténtalo de nuevo.");
+                </script>';
+            }
+        }
+    }
+}
+
+  /*public function validarUsuario($user, $password)
   {
 
     $user = mysqli_real_escape_string($this->conex, $user);
@@ -52,19 +88,20 @@ class Consultas
         }
       }
     }
-  }
+  }*/
 
   //Actualiza la fecha del ultimo inicio de sesión
   public function fechaUltimo($id_login)
   {
-
-    $id_login = mysqli_real_escape_string($this->conex, $id_login);
-
-    $consulta = "UPDATE login SET 
-          fecha_ultimo_ingreso = '" . $this->fecha . "'
-          WHERE id_login = '" . $id_login . "'";
-
-    mysqli_query($this->conex, $consulta) or die("Error al ingresar datos a la Base LOGIN0001");
+    $fecha_ultimo_ingreso = $this->fecha;
+    $sql = "UPDATE login SET fecha_ultimo_ingreso = :fecha_ultimo_ingreso WHERE id_login = :id_login";
+    $stmt = $this->conex->prepare($sql);
+    $stmt->bindParam(':fecha_ultimo_ingreso', $fecha_ultimo_ingreso);
+    $stmt->bindParam(':id_login', $id_login);
+    $stmt->execute();
+    if (!$stmt) {
+      throw new Exception("Error al actualizar fecha: " . $this->conex->error);
+    }
 
   }
 

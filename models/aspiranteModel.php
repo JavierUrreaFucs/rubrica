@@ -88,6 +88,7 @@ require_once ("../db/conexionRubrica.php");
    * Lista de aspirantes
    */
   public function selectAspirante(){
+    
     $sql ="SELECT a.id_estudiante, a.nombre_estudiante, a.tipoDoc, a.cedula, a.programa_id_programa, b.nombre_programa, a.rubrica FROM estudiante a INNER JOIN programa b ON a.programa_id_programa = b.id_programa ORDER BY id_estudiante ASC";
     try {
       $stmt = $this->conexRubrica->prepare($sql);

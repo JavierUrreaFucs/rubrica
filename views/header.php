@@ -1,3 +1,11 @@
+<?php 
+session_start();
+
+if (empty($_SESSION['correo'])) {
+  session_destroy();
+  header('location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,18 +21,18 @@
 <body>
 
 <div class="d-flex">
-    <nav id="sidebarMenu" class="collapse d-md-block bg-white sidebar collapse">
+    <nav id="sidebarMenu" class="collapse d-md-block sidebar collapse">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a class="navbar-brand pb-5" href="aspirantes.php">Navbar</a>
-          <a href="aspirantes.php" class="nav-link py-2" aria-current="true">
+          <a class="navbar-brand pb-5 text-nav" href="aspirantes.php"><img class="img-fluid img-logo" src="assets/img/LOGO-FUCS-fondo-Azul-Fundadores.png" alt="logo-fucs"></a>
+          <a href="aspirantes.php" class="nav-link py-2 text-nav" aria-current="true"><i class="bi bi-house-door"></i> 
             <span>Inicio</span>
           </a>
-          <a href="registro.php" class="nav-link py-2">
+          <a href="registro.php" class="nav-link py-2 text-nav"><i class="bi bi-clipboard2-plus"></i> 
             <span>Registro</span>
           </a>
-          <a href="rubrica.php" class="nav-link py-2">
-            <span>Rubrica</span>
+          <a href="usuarios.php" class="nav-link py-2 text-nav"><i class="bi bi-check2-square"></i> 
+            <span>Usuarios</span>
           </a>
         </div>
       </div>
@@ -32,15 +40,16 @@
 
     <div class="container-fluid container-desktop">
       <header>
-        <nav class="navbar navbar-expand-lg bg-white bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <span class="px-3 fw-bold nombre-usuario"><?php echo $_SESSION['nombre_login'] ?></span>
               <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-md-none">
                 <li class="nav-item">
-                  <a class="nav-link active" href="aspirantes.php">Inicio</a>
+                  <a class="nav-link active" href="aspirantes.php"><i class="bi bi-house-door"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="registro.php">Registro</a>
@@ -49,14 +58,15 @@
                   <a class="nav-link" href="#">Control</a>
                 </li>
               </ul>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Menú
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
-                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    <li><a class="dropdown-item" href="logout.php">Cerrar Sesión</a></li>
                   </ul>
                 </li>
               </ul>
