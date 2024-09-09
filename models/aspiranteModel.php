@@ -87,19 +87,40 @@ require_once ("../db/conexionRubrica.php");
   /**
    * Lista de aspirantes
    */
-  public function selectAspirante(){
-    
-    $sql ="SELECT a.id_estudiante, a.nombre_estudiante, a.tipoDoc, a.cedula, a.programa_id_programa, b.nombre_programa, a.rubrica FROM estudiante a INNER JOIN programa b ON a.programa_id_programa = b.id_programa ORDER BY id_estudiante ASC";
+  public function selectAspirante($filtro) {
     try {
-      $stmt = $this->conexRubrica->prepare($sql);
-      $stmt->execute();
-      // Obtener todos los resultados como un array asociativo
-      $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      // Retornar los resultados
-      return $resultados;
+        // Consulta base
+        $sql = "SELECT a.id_estudiante, a.nombre_estudiante, a.tipoDoc, a.cedula, a.programa_id_programa, b.nombre_programa, a.rubrica 
+                FROM estudiante a 
+                INNER JOIN programa b ON a.programa_id_programa = b.id_programa";
+
+        // Añadir condiciones basadas en el filtro
+        switch ($filtro) {
+            case 0:
+                $sql .= " WHERE a.rubrica = 0";
+                break;
+            case 1:
+                $sql .= " WHERE a.rubrica = 1";
+                break;
+            case 2:
+                $sql .= " WHERE a.rubrica = 2";
+                break;
+        }
+
+        // Agregar la cláusula de ordenamiento al final
+        $sql .= " ORDER BY a.id_estudiante ASC";
+
+        // Preparar y ejecutar la consulta
+        $stmt = $this->conexRubrica->prepare($sql);
+        $stmt->execute();
+
+        // Obtener y retornar todos los resultados como un array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     } catch (PDOException $e) {
-      die("Error en la ejecución de la consulta: data0004".$e->getMessage());
+        // Manejar el error
+        die("Error en la ejecución de la consulta: data0004" . $e->getMessage());
     }
-  }
+}
 
  }

@@ -57,39 +57,6 @@ class Consultas
     }
 }
 
-  /*public function validarUsuario($user, $password)
-  {
-
-    $user = mysqli_real_escape_string($this->conex, $user);
-    $password = mysqli_real_escape_string($this->conex, $password);
-
-    //Consulta para el login
-    $query_query_usuario = "SELECT * FROM login a INNER JOIN tipo_login b ON b.id_tipo_login = a.login_id_tipo
-        WHERE correo = '" . $user . "' AND activo_login = 1";
-    $query_usuario = mysqli_query($this->conex, $query_query_usuario) or die('No se realizo la conexion a la base de datos');
-    $totalRows_query_usuario = mysqli_num_rows($query_usuario); // Cuenta el numero de filas de la consulta
-
-    if ($totalRows_query_usuario == 0) {
-      echo '<script language="javascript">alert("Credenciales incorrectas");</script>';
-      echo '<script>document.location.href="../view/login.php"</script>';
-    } else {
-      // recorre la consulta para optener los datos
-      while ($row = mysqli_fetch_assoc($query_usuario)) {
-        $this->resultado[] = $row;
-        // se compara la conraseña insertada con la encriptada en la base de datos
-        if (password_verify($password, $row['password'])) {
-
-          return $this->resultado;
-
-        } else {
-          echo '<script>
-              alert("¡Contraseña incorrecta! Intentalo de nuevo.")
-            </script>';
-        }
-      }
-    }
-  }*/
-
   //Actualiza la fecha del ultimo inicio de sesión
   public function fechaUltimo($id_login)
   {

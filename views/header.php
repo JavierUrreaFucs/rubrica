@@ -4,7 +4,9 @@ session_start();
 if (empty($_SESSION['correo'])) {
   session_destroy();
   header('location: login.php');
+  exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,39 +36,50 @@ if (empty($_SESSION['correo'])) {
           <a href="usuarios.php" class="nav-link py-2 text-nav"><i class="bi bi-check2-square"></i> 
             <span>Usuarios</span>
           </a>
+          <a href="programas.php" class="nav-link py-2 text-nav"><i class="bi bi-book"></i>
+            <span>Programas</span>
+          </a>
+          <a href="reportes.php" class="nav-link py-2 text-nav"><i class="bi bi-bar-chart-line"></i>
+            <span>Reportes</span>
+          </a>
         </div>
       </div>
     </nav>
 
     <div class="container-fluid container-desktop">
       <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg menu-bg text-white">
+          <div class="container-fluid px-2">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <span class="px-3 fw-bold nombre-usuario"><?php echo $_SESSION['nombre_login'] ?></span>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-md-none">
+              <p class="px-3 pt-3 fw-bold nombre-usuario"><?php echo $_SESSION['nombre_login'] ?></p>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-md-none px-2">
                 <li class="nav-item">
-                  <a class="nav-link active" href="aspirantes.php"><i class="bi bi-house-door"></i> Inicio</a>
+                  <a class="nav-link text-nav" href="aspirantes.php"><i class="bi bi-house-door"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="registro.php">Registro</a>
+                  <a class="nav-link text-nav" href="registro.php"><i class="bi bi-clipboard2-plus"></i> Registro</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Control</a>
+                  <a class="nav-link text-nav" href="usuarios.php"><i class="bi bi-check2-square"></i> Usuarios</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-nav" href="programas.php"><i class="bi bi-book"></i> Programas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-nav" href="reportes.php"><i class="bi bi-bar-chart-line"></i> Reportes</a>
                 </li>
               </ul>
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 px-2">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle menu-bg" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Menú
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
-                    <li><a class="dropdown-item" href="logout.php">Cerrar Sesión</a></li>
+                  <ul class="dropdown-menu dropdown-menu-end menu-bg">
+                    <li><a class="dropdown-item menu-bg" href="#">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item menu-bg" href="logout.php">Cerrar Sesión</a></li>
                   </ul>
                 </li>
               </ul>

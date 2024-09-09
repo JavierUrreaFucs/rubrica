@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <main>
+  <main class="main-div"> 
     <div class="container-fluid fondo">
       <div class="row menu-login centro-contenedor-login">
         <div class="col-md-6">

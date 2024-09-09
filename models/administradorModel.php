@@ -81,7 +81,51 @@ class Administrador {
     }
 
   }
+
+  /**
+   * Programas
+  */
   
+  // Crear programas
+  public function crearPrograma($nombrePrograma, $nombreUsuario) {
+
+    try {
+      $sql = "INSERT INTO programa(nombre_programa, usuarioActualiza) VALUES ( :nombre_programa, :usuarioActualiza)";
+
+      $stmt = $this->conexRubrica->prepare($sql);
+      $stmt->bindParam(':nombre_programa', $nombrePrograma);
+      $stmt->bindParam(':usuarioActualiza', $nombreUsuario);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      die("Error en la ejecución de la consulta: ".$e->getMessage());
+    }
+
+  }
+
+  //Ver todos los programas
+  public function selectProgramas($filtro) {
+    try {
+        // Definir la consulta base
+        $sql = "SELECT * FROM programa";
+        
+        // Modificar la consulta si hay un filtro
+        if ($filtro == 1) {
+            $sql .= " WHERE activo_programa = 1";
+        } else if ($filtro == 0) {
+            $sql .= " WHERE activo_programa = 0";
+        }
+        
+        // Preparar y ejecutar la consulta
+        $stmt = $this->conexRubrica->prepare($sql);
+        $stmt->execute();
+        
+        // Obtener y retornar todos los resultados como un array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Error en la ejecución de la consulta: " . $e->getMessage());
+    }
+  }
 
   
 }

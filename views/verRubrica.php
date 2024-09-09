@@ -14,7 +14,7 @@ include "header.php";
 
 <main>
 
-  <div class="container-fluid bg-white rounded ">
+  <div class="container-fluid bg-white rounded">
     <!-- Fila 1 -->
     <div class="row px-5 py-3">
       <div class="col-12">
@@ -114,16 +114,16 @@ include "header.php";
     <?php
     $verRubrica = new Rubrica();
     $resultadoRubrica = $verRubrica->mostrarRubrica($documento);
-    
+
     $sumaICFES = $sumaEntrevista = $sumaTotalAdmision = 0;
-    
+
     if (!empty($resultadoRubrica)) {
-        foreach ($resultadoRubrica as $rowResult) {
-            // Sumar calificaciones
-            $sumaICFES += $rowResult['calificaICFES'];
-            $sumaEntrevista += $rowResult['totalEntre'];
-            $sumaTotalAdmision += $rowResult['totalAdmision'];
-        }
+      foreach ($resultadoRubrica as $rowResult) {
+        // Sumar calificaciones
+        $sumaICFES += $rowResult['calificaICFES'];
+        $sumaEntrevista += $rowResult['totalEntre'];
+        $sumaTotalAdmision += $rowResult['totalAdmision'];
+      }
     ?>
       <div class="row px-3 py-3">
         <div class="col-12 col-md-10 mx-auto">
@@ -135,50 +135,55 @@ include "header.php";
                 <th class="text-center">Total Admisión</th>
               </thead>
               <tbody>
-                <td class="text-center"><?php echo round($sumaICFES / 2, 1 )//Redondea a un decimal ?></td>
-                <td class="text-center"><?php echo round($sumaEntrevista / 2, 1)//Redondea a un decimal ?></td>
-                <td class="text-center"><?php echo round($sumaTotalAdmision / 2, 1)//Redondea a un decimal ?></td>
+                <td class="text-center"><?php echo round($sumaICFES / 2, 1) //Redondea a un decimal 
+                                        ?></td>
+                <td class="text-center"><?php echo round($sumaEntrevista / 2, 1) //Redondea a un decimal 
+                                        ?></td>
+                <td class="text-center"><?php echo round($sumaTotalAdmision / 2, 1) //Redondea a un decimal 
+                                        ?></td>
               </tbody>
             </table>
           </div>
           <hr>
-          <?php 
-          }
-          // Mostrar los detalles de cada rubrica
-          foreach ($resultadoRubrica as $rowResult) {
-          ?>
+        <?php
+      }
+      // Mostrar los detalles de cada rubrica
+      foreach ($resultadoRubrica as $rowResult) {
+        ?>
           <div class="py-3">
-          <h3 class="py-2">Detalles de la entrevista</h3>
-          <table class="table table-success">
-            <thead>
-              <tr>
-                <th class="text-center">Fecha de Entrevista</th>
-                <th class="text-center">Nombre Entrevistador</th>
-                <th class="text-center">Calificación ICFES</th>
-                <th class="text-center">Calificación Entrevista</th>
-                <th class="text-center">Total Admisión</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">
-                  <?php
-                  $fecha_entrevista = $rowResult['fechaEntrevista'];
-                  // Convertir la cadena de fecha a un objeto DateTime
-                  $fecha = new DateTime($fecha_entrevista);
-                  // Formatear la fecha en 'Y-m-d'
-                  $fechaFormateada = $fecha->format('d-m-Y');
-                  // Mostrar la fecha formateada
-                  echo $fechaFormateada;
-                  ?>
-                </td>
-                <td class="text-center"><?php echo $rowResult['creoEntrevista'] ?></td>
-                <td class="text-center"><?php echo $rowResult['calificaICFES'] ?></td>
-                <td class="text-center"><?php echo $rowResult['totalEntre'] ?></td>
-                <td class="text-center"><?php echo $rowResult['totalAdmision'] ?></td>
-              </tr>
-            </tbody>
-          </table>
+            <h3 class="py-2">Detalles de la entrevista</h3>
+            <div class="table-responsive">
+            <table class="table table-success">
+              <thead>
+                <tr>
+                  <th class="text-center">Fecha de Entrevista</th>
+                  <th class="text-center">Nombre Entrevistador</th>
+                  <th class="text-center">Calificación ICFES</th>
+                  <th class="text-center">Calificación Entrevista</th>
+                  <th class="text-center">Total Admisión</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">
+                    <?php
+                    $fecha_entrevista = $rowResult['fechaEntrevista'];
+                    // Convertir la cadena de fecha a un objeto DateTime
+                    $fecha = new DateTime($fecha_entrevista);
+                    // Formatear la fecha en 'Y-m-d'
+                    $fechaFormateada = $fecha->format('d-m-Y');
+                    // Mostrar la fecha formateada
+                    echo $fechaFormateada;
+                    ?>
+                  </td>
+                  <td class="text-center"><?php echo $rowResult['creoEntrevista'] ?></td>
+                  <td class="text-center"><?php echo $rowResult['calificaICFES'] ?></td>
+                  <td class="text-center"><?php echo $rowResult['totalEntre'] ?></td>
+                  <td class="text-center"><?php echo $rowResult['totalAdmision'] ?></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
           </div>
 
           <div class="row g-3 py-2">
@@ -298,16 +303,20 @@ include "header.php";
             </div>
           </div>
           <hr>
-          <?php } ?>
+        <?php } ?>
+        <div class="col-12">
+          <a class="btn btn-primary" href="aspirantes.php">Atrás</a>
         </div>
-        
-      </div>
-      <hr>
-      
-      <div class="col-12">
-        <a class="btn btn-primary" href="aspirantes.php">Atrás</a>
+
+        </div>
+
       </div>
   </div>
+
 </main>
 
+<script>
+  let titulo = document.title;
+  document.title = "Rubrica | Ver Rubrica";
+</script>
 <?php include "footer.php" ?>

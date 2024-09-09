@@ -11,12 +11,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  <title>Rutas FUCS | Recuperar contraseña</title>
+  <title>Rubrica | Recuperar contraseña</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link href="css/styleLogin.css" rel="stylesheet">
 </head>
 <body>
-  <main>
+  <main class="main-div"> 
     <div class="container-fluid text-center fondo">
       <div class="row justify-content-center centro-contenedor-login">
         <div class="col-md-5">

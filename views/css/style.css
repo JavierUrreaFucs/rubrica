@@ -1,7 +1,14 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
-  padding: 15px 15px;
+  flex: 1; /* Esto permite que el contenido crezca y ocupe el espacio disponible */
+  padding: 15px;
   background-color: #F0F0F0;
-  height: 90.5%;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -36,6 +43,7 @@ input[type=number] { -moz-appearance:textfield; }
 
 .d-flex {
   display: flex;
+  height: 100%;
 }
 
 #sidebarMenu {
@@ -43,6 +51,7 @@ input[type=number] { -moz-appearance:textfield; }
   min-width: 15%;
   background-color: #0A2655;
   height: 100%;
+  z-index: 2;
 }
 
 .list-group-item {
@@ -55,6 +64,14 @@ input[type=number] { -moz-appearance:textfield; }
   margin-top: 0;
 }
 
+.menu-bg{
+  background-color: #0A2655;
+  color: #F0F0F0;
+}
+
+.navbar-toggler {
+  background-color: #FAD785 !important;
+}
 
 .list-group-item-action:hover + .dropdown-menu, 
 .dropdown-menu:hover {
@@ -86,12 +103,18 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .img-logo {
-  width: 160px;
+  width: 140px;
 }
 /* end Navbar */
 
+/* main */
 .container-fluid {
   --bs-gutter-x: 0 !important;
+}
+/* end main */
+
+.main-div{
+  height: 100vh;
 }
 
 /* footer */
@@ -99,6 +122,8 @@ input[type=number] { -moz-appearance:textfield; }
   background-color: #000000;
   text-align: center;
   padding: 10px;
+  bottom: 0;
+  width: 100%;
 }
 /* end footer */
 
@@ -125,10 +150,19 @@ input[type=number] { -moz-appearance:textfield; }
   }
 
   .layaout-user {
-    height: 100vh !important;
+    height: 100% !important;
   }
 
   .nombre-usuario {
+    color: #0A2655;
+  }
+
+  .main-div{
+    height: 100vh;
+  }
+
+  .menu-bg{
+    background-color: #FFFFFF;
     color: #0A2655;
   }
 }

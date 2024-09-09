@@ -31,3 +31,14 @@ else if (isset($_POST['cambioUsuario'])) {
   }
 
 }
+
+else if (isset($_POST['crearPrograma'])) {
+  $nombrePrograma = $_POST['nombrePrograma'];
+  $nombreusuario = $_POST['usuario'];
+
+  $insertar = new Administrador();
+  $insertarPrograma = $insertar->crearPrograma($nombrePrograma, $nombreUsuario);
+
+  echo '<script language="javascript">alert("Se creo el nuevo programa con exito.")</script>';
+  echo '<script>document.location.href="../s/programas.php"</script>';
+}

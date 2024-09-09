@@ -1,64 +1,55 @@
 <?php
-
-require_once("../model/conexion.php");
-require_once("phpmailer/Exception.php");
-require_once("phpmailer/PHPMailer.php");
-require_once("phpmailer/SMTP.php");
+require("../db/conexionRubrica.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class CorreoManager
+require 'vendor/autoload.php';
+
+class correoManager
 {
 
   private $con;
   public function __construct()
   {
-    $this->con = new Conexion();
+    $this->con = new ConexionMatricula();
   }
-  // Envia correo al usuario cuando se genera una nueva reserva
-  public function enviarCorreoReserva($nombre, $correo, $horario, $destino, $reservaPago)
+
+  public function correoUsuario($correo)
   {
-
-    $hora = "";
-
-    // se valida la hora de reserva
-    if ($horario == 1) {
-      $hora = "11:20 a.m";
-    } else if ($horario == 2) {
-      $hora = "12:30 p.m";
-    } else if ($horario == 3) {
-      $hora = "12:00 m";
-    } else {
-      $hora = "1:00 p.m";
-    }
+    $mail = new PHPMailer(true);
 
     try {
-      $mail = new PHPMailer(true);
-      $mail->SMTPDebug = 0; // Habilita la salida de depuración detallada 
-      $mail->isSMTP(); // Configure el remitente para usar SMTP 
-      $mail->Host = 'smtp.gmail.com'; // Especifique los servidores SMTP principales y de respaldo 
-      $mail->SMTPAuth = true; // Habilitar autenticación SMTP
-      $mail->Username = 'jhurrea@fucsalud.edu.co'; // SMTP username
-      $mail->Password = 'oddj ugog ocax rfdz'; // Habilitar autenticación SMTP    
-      $mail->SMTPSecure = 'tls'; // Habilita el cifrado TLS, `ssl` también aceptado 
-      $mail->Port = 587; // Puerto TCP para conectarse        
-      $mail->setFrom('jhurrea@fucsalud.edu.co');
-      $mail->addAddress($correo);
-      $mail->isHTML(true); // Establecer el formato de correo electrónico en HTML 
-      $mail->CharSet = 'UTF-8';
-      $mail->Subject = 'Nueva Reserva Ruta FUCS';
-      $fecha = date('d-m-Y');
-      $body = '<p>Cordial saludo ' . $nombre . '</p><p>Gracias por utilizar el aplicativo de rutas FUCS para su movilización. Le confirmamos que hemos reservado un cupo de asiento para en el siguiente Horario:</p><ul><li>Destino: ' . $destino . '</li><li>Fecha: ' . $fecha . '</li><li>Hora de salida: ' . $hora . '</li><li>Estado: ' . $reservaPago . '</li></ul><p>Por favor, Recuerde llegar con al menos 15 minutos de anticipación al momento del abordaje.</p><p>Esperamos que disfrutes de tu viaje.</p><br><p>Cordialmente,</p><br><p>[nombre y firma del remitente]</p><br><p><strong>¡Por favor, NO responder este mensaje!</strong></p>';
-      $mail->Body = $body;
+      // Configuración del servidor SMTP
+      $mail->isSMTP();
+      $mail->Host       = 'smtp.gmail.com';  // Servidor SMTP
+      $mail->SMTPAuth   = true;
+      $mail->Username   = 'tu_correo@example.com';  // Usuario SMTP
+      $mail->Password   = 'tu_contraseña';  // Contraseña SMTP
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Habilitar encriptación TLS
+      $mail->Port       = 587;  // Puerto TCP
+
+      // Remitente y destinatarios
+      $mail->setFrom('jhurea@fucsalud.edu.co');
+      $mail->addAddress($correo);  // Añadir destinatario
+
+      // Contenido del correo
+      $mail->isHTML(true);
+      $mail->Subject = 'Rubrica de calificaciones - Nuevo usuario asignado';
+      $mail->Body    = 'Bienvenido al aplicativo de <b>Rubrica de calificaciones</b>.<br><br>
+      Las credenciales de acceso al aplicativo son los siguientes:<br><br>
+      <b>Usuario:</b> '.$correo.'<br>
+      <b>Contraseña:</b> fucsalud123*<br><br>
+      Una vez ingrese al aplicativo se recomienda cambiar la contraseña.<br><br>
+      Cordialmente,
+      <b>Admisiones, registro y control</b>';
+      $mail->AltBody = 'Este es el contenido del correo en texto plano.';
+
+      // Enviar correo
       $mail->send();
-      // Cerrar la conexión a la base de datos si es necesario
-      // $this->con->close();
-      return true;
+      echo 'Correo enviado correctamente';
     } catch (Exception $e) {
-      // Registrar el error en un archivo de registro o notificar al administrador
-      error_log("Error al enviar el correo: " . $e->getMessage(), 0);
-      return false;
+      echo "Error al enviar el correo: {$mail->ErrorInfo}";
     }
   }
 

@@ -3,8 +3,8 @@ require('../models/aspiranteModel.php');
 include "header.php";
 ?>
 
-<main>
-  <div class="container-fluid bg-white rounded layaout-user">
+<main class="main-div"> 
+  <div class="container-fluid bg-white rounded">
     <!-- Fila 0 -->
     <div class="col-12 p-3">
       <h2 class="h2">Programa de interes</h2>
@@ -172,4 +172,9 @@ include "header.php";
 </main>
 
 <script src="../views/js/registro.js"></script>
+<script>
+  let titulo = document.title;
+  document.title = "Rubrica | Registro";
+</script>
+
 <?php include "footer.php" ?>

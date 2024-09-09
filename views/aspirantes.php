@@ -1,24 +1,23 @@
 <?php
 require("../models/aspiranteModel.php");
-
 include "header.php";
-
 ?>
 
-<main>
+<main class="main-div"> 
   <section>
-    <div class="container-fluid bg-white rounded py-2 px-3 layaout-user">
+    <div class="container-fluid bg-white rounded py-2 px-3">
       <h1 class="h1">Lista de Aspirantes</h1>
       <hr>
       <div class="py-3 p-md-3">
         <form method="POST" action="">
           <div class="row">
             <div class="col-6 col-md-4">
-              <label for="fecha_inicio">Estado:</label>
-              <select class="form-select" name="estado">
-                <option value="">Seleccione una opción</option>
+              <label for="estado">Estado:</label>
+              <select class="form-select" name="estado" id="estado">
+                <option value="">Todo</option>
                 <option value="0">Realizar entrevista</option>
-                <option value="1">Ver rubrica</option>
+                <option value="1">Segunda entrevista</option>
+                <option value="2">Ver rubrica</option>
               </select>
             </div>
             <div class="col-6 col-md-2">
@@ -42,20 +41,24 @@ include "header.php";
             </thead>
             <tbody>
               <?php
-              // filtrar tabla por fechas de reservas
-              $vistaAspirante = new Aspirante();
-              $resAspirante = $vistaAspirante->selectAspirante();
-              // Verificar si se enviaron fechas desde el formulario
-              /*if(isset($_POST["filtra-reserva"])){
-                if ((!empty($_POST[''])) || (!empty($_POST['']))) {
-                  $resReserva = $vistaUsuario->verReservasFiltradas($fechaInicio, $fechaFin, $horarioFiltro);
-                } else {
-                  // Si no se enviaron fechas, mostrar todas las reservas
-                  $resReserva = $vistaUsuario->verReservas(1);
-                }
-              }*/
+              $vistaAspirantes = new Aspirante();
+              $resAspirantes = [];
 
-              foreach ($resAspirante as $rowAspirante) {
+              // Verificar si se usó el filtro
+              if (isset($_POST['filtrar'])) {
+                // Aplicar filtro solo si se seleccionó un estado
+                if (isset($_POST['estado']) && $_POST['estado'] !== "") {
+                  $resAspirantes = $vistaAspirantes->selectAspirante($_POST['estado']);
+                } else {
+                  // Mostrar todos los aspirantes si no se seleccionó ningún estado
+                  $resAspirantes = $vistaAspirantes->selectAspirante(3);
+                }
+              } else {
+                // Mostrar todos los aspirantes por defecto
+                $resAspirantes = $vistaAspirantes->selectAspirante(-1);
+              }
+
+              foreach ($resAspirantes as $rowAspirante) {
               ?>
                 <tr>
                   <td class="th-font"><?php echo $rowAspirante['id_estudiante'] ?></td>
@@ -67,16 +70,18 @@ include "header.php";
                     <?php
                     if ($rowAspirante['rubrica'] == 0) {
                     ?>
-                        <form action="rubrica.php" method="GET">
-                          <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
-                          <div class="d-grid gap-2">
-                            <input type="submit" class="btn btn-warning btn-sm" name="realizarRubrica" value="Realizar entrevista">
-                          </div>
-                        </form>
+                      <form action="rubrica.php" method="GET" target="_blank">
+                        <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
+                        <input type="hidden" name="nombre" value="<?php echo $rowAspirante['nombre_estudiante'] ?>" readonly>
+                        <div class="d-grid gap-2">
+                          <input type="submit" class="btn btn-warning btn-sm" name="realizarRubrica" value="Realizar entrevista">
+                        </div>
+                      </form>
                     <?php  } else if ($rowAspirante['rubrica'] == 1) { ?>
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <form action="rubrica.php" method="GET">
+                        <form action="rubrica.php" method="GET" target="_blank">
                           <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
+                          <input type="hidden" name="nombre" value="<?php echo $rowAspirante['nombre_estudiante'] ?>" readonly>
                           <button type="submit" class="btn btn-primary btn-sm" name="realizarRubrica">Realizar entrevista</button>
                         </form>
                         <form action="verRubrica.php" method="GET">
@@ -93,9 +98,7 @@ include "header.php";
                       </form>
                     <?php } ?>
                   </td>
-
                 </tr>
-
               <?php } ?>
             </tbody>
           </table>
@@ -104,5 +107,9 @@ include "header.php";
     </div>
   </section>
 </main>
+
+<script>
+  document.title = "Rubrica | Aspirantes";
+</script>
 
 <?php include "footer.php" ?>

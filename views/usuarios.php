@@ -5,11 +5,10 @@ require("../controllers/administradorController.php");
 include "header.php";
 ?>
 
-<main>
+<main class="main-div">
 
-  <div class="container layaout-user">
     <div class="container-fluid bg-white rounded py-2">
-      <h1 class="h1">Usuarios Administradores</h1>
+      <h1 class="px-3">Usuarios Administradores</h1>
       <hr>
       <div class="container">
         <!-- Button trigger modal -->
@@ -23,7 +22,7 @@ include "header.php";
             <div class="col-6 col-md-4">
               <label for="estado">Estado:</label>
               <select class="form-select" name="estado">
-                <option value="">Seleccione una opción</option>
+                <option value="">Todos</option>
                 <option value="0">Inactivos</option>
                 <option value="1">Activos</option>
               </select>
@@ -126,10 +125,13 @@ include "header.php";
         </div>
       </div>
     </div>
-  </div>
 
 </main>
 
+<script>
+  let titulo = document.title;
+  document.title = "Rubrica | Usuarios";
+</script>
 
 <script src="js/usuarios.js">//Alerta de confirmación al inactivar o activar un usuario</script>
 <?php include "footer.php"; ?>

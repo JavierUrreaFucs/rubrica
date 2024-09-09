@@ -52,7 +52,7 @@ if(isset($_POST['enviarEntrevista'])) {
   $insertarRubrica->updateRubricaEstudiante($documentoEstudiante);
   echo '<script>
     window.alert("La entrevista del aspirante se guardo correctamente.");
-    window.location.href = "../views/aspirantes.php";
+    window.close();
   </script>';
 
   } catch (Exception $e) {

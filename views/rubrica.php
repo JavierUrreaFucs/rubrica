@@ -3,6 +3,7 @@ require_once("../models/rubricaModel.php");
 
 if (isset($_GET['realizarRubrica'])) {
   $docNum = $_GET['cedula'];
+  $name = $_GET['nombre'];
 }
 
 include "header.php";
@@ -12,7 +13,7 @@ include "header.php";
 
   <div class="container-fluid bg-white rounded">
     <!-- Fila 1 -->
-    <div class="row px-3 py-3">
+    <div class="row px-5 py-3">
       <div class="col-12">
         <h2 class="h2">Datos del aspirante</h2>
         <p>A continuación encontrará los datos del estudiante</p>
@@ -25,15 +26,15 @@ include "header.php";
           foreach ($resultadoAspitante as $rowResult) {
           ?>
             <div class="col-md-4">
-              <label for="NombreAspirante" class="form-label"><strong>Nombre del aspirante:</strong></label>
+              <p><strong>Nombre del aspirante:</strong></p>
               <p><?php echo $rowResult['nombre_estudiante'] ?></p>
             </div>
             <div class="col-12 col-md-4">
-              <label for="programas" class="form-label"><strong>Programa:</strong></label>
+              <p><strong>Programa:</strong></p>
               <p><?php echo $rowResult['nombre_programa'] ?></p>
             </div>
             <div class="col-12 col-md-4">
-              <label for="institución" class="form-label"><strong>Institución</strong></label>
+              <p><strong>Institución</strong></p>
               <?php if (empty($rowResult['colegio'])) { ?>
                 <p><?php echo $rowResult['universidad'] ?></p>
               <?php } else { ?>
@@ -41,11 +42,11 @@ include "header.php";
               <?php } ?>
             </div>
             <div class="col-12 col-md-4">
-              <label for="anioGrado" class="form-label"><strong>Año de graduación:</strong></label>
+              <p><strong>Año de graduación:</strong></p>
               <p><?php echo $rowResult['anioGrado'] ?></p>
             </div>
             <div class="col-12 col-md-8">
-              <label for="inputCity" class="form-label"><strong>Estudios</strong></label>
+              <p><strong>Estudios</strong></p>
               <?php if (empty($rowResult['estudioAdicional'])) { ?>
                 <p><?php echo $rowResult['titulo'] ?></p>
               <?php } else { ?>
@@ -55,7 +56,7 @@ include "header.php";
         </div>
         <div class="row g-3">
           <div class="col-12 col-md-4">
-            <label for="inputCity" class="form-label"><strong>Oficio de la madre</strong></label>
+            <p><strong>Oficio de la madre</strong></p>
             <?php if (empty($rowResult['obsMadre'])) { ?>
               <p> <i>Solo para programa de medicina</i></p>
             <?php } else { ?>
@@ -63,7 +64,7 @@ include "header.php";
             <?php } ?>
           </div>
           <div class="col-12 col-md-4">
-            <label for="inputCity" class="form-label"><strong>Oficio del padre</strong></label>
+            <p><strong>Oficio del padre</strong></p>
             <?php if (empty($rowResult['obsPadre'])) { ?>
               <p><i>Solo para programa de medicina</i></p>
             <?php } else { ?>
@@ -72,7 +73,7 @@ include "header.php";
           </div>
           <div class="d-none">
             <div class="col-12 col-md-2">
-              <label for="inputCity" class="form-label"><strong>Trabaja actualmente</strong></label>
+              <p><strong>Trabaja actualmente</strong></p>
               <?php if (empty($rowResult['trabaja'])) { ?>
                 <p> <i>Aplica solo para programas posgrado</i></p>
               <?php } else { ?>
@@ -80,7 +81,7 @@ include "header.php";
               <?php } ?>
             </div>
             <div class="col-12 col-md-4">
-              <label for="inputCity" class="form-label"><strong>Nombre de la empresa</strong></label>
+              <p><strong>Nombre de la empresa</strong></p>
               <?php if (empty($rowResult['lugarTrabajo'])) { ?>
                 <p><i>Aplica solo para programas posgrado</i></p>
               <?php } else { ?>
@@ -93,7 +94,7 @@ include "header.php";
     </div>
     <hr class="hr">
     <!-- Fila 2 -->
-    <div class="row px-3 py-3">
+    <div class="row px-5 py-3">
       <div class="col-12">
         <h2 class="h2">Calificación</h2>
         <p>Asigne la calificación correspondiente según lo visto en la entrevista al aspirante</p>
@@ -324,6 +325,12 @@ include "header.php";
         </div>
       </div>
     </div>
+  </div>
+
 </main>
+<script>
+  let titulo = document.title;
+  document.title = "Rubrica | <?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>";
+</script>
 
 <?php include "footer.php" ?>
