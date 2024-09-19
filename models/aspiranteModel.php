@@ -21,7 +21,9 @@ require_once ("../db/conexionRubrica.php");
    */
   public function insertarEstudiante($nombre_estudiante, $tipoDoc, $cedula, $colegio, $universidad, $titulo, $anioGrado, $ICFES, $ciudad, $estudioAdicional, $programa_id_programa, $obsMadre, $obsPadre, $trabaja, $lugarTrabajo) {
 
-    $sql = "INSERT INTO estudiante( nombre_estudiante, tipoDoc, cedula, colegio, universidad, titulo, anioGrado, ICFES, ciudad, estudioAdicional, programa_id_programa, obsMadre, obsPadre, trabaja, lugarTrabajo) VALUES ( :nombre_estudiante, :tipoDoc, :cedula, :colegio, :universidad, :titulo, :anioGrado, :ICFES, :ciudad, :estudioAdicional, :programa_id_programa, :obsMadre, :obsPadre, :trabaja, :lugarTrabajo)";
+    $fecha = date("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO estudiante( nombre_estudiante, tipoDoc, cedula, colegio, universidad, titulo, anioGrado, ICFES, ciudad, estudioAdicional, programa_id_programa, obsMadre, obsPadre, trabaja, lugarTrabajo, fecha_creado, fecha_actualizacion) VALUES ( :nombre_estudiante, :tipoDoc, :cedula, :colegio, :universidad, :titulo, :anioGrado, :ICFES, :ciudad, :estudioAdicional, :programa_id_programa, :obsMadre, :obsPadre, :trabaja, :lugarTrabajo, :fecha_creado, :fecha_actualizacion)";
 
     try {
         $stmt = $this->conexRubrica->prepare($sql);
@@ -40,6 +42,8 @@ require_once ("../db/conexionRubrica.php");
         $stmt->bindParam(':obsPadre', $obsPadre);
         $stmt->bindParam(':trabaja', $trabaja);
         $stmt->bindParam(':lugarTrabajo', $lugarTrabajo);
+        $stmt->bindParam(':fecha_creado', $fecha);
+        $stmt->bindParam(':fecha_actualizacion', $fecha);
 
         $stmt->execute();
         return true;

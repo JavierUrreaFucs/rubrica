@@ -82,6 +82,38 @@ class Administrador {
 
   }
 
+  // Editar Usuario
+  public function verUsuarios($filtro) {
+    try {
+        // Definir la consulta base
+        $sql = "SELECT * FROM login WHERE id_login = :id_login";
+        // Preparar y ejecutar la consulta
+        $stmt = $this->conexRubrica->prepare($sql);
+        $stmt->bindParam(':id_login', $filtro);
+        $stmt->execute();
+        
+        // Obtener y retornar todos los resultados como un array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Error en la ejecución de la consulta: " . $e->getMessage());
+    }
+  }
+
+  public function editUsuario($nombreUsuario, $correo, $id_login) {
+
+    try {
+      $sql = "UPDATE login SET nombre_login = :nombreLogin, correo = :correo WHERE id_login = :id_login";
+      $stmt = $this->conexRubrica->prepare($sql);
+      $stmt->bindParam(':nombreLogin', $nombreUsuario);
+      $stmt->bindParam(':correo', $correo);
+      $stmt->bindParam(':id_login', $id_login);
+      $stmt->execute(); 
+    } catch (PDOException $e) {
+      die("Error en la ejecución de la consulta: " . $e->getMessage());
+    }
+
+  }
+
   /**
    * Programas
   */
@@ -89,12 +121,15 @@ class Administrador {
   // Crear programas
   public function crearPrograma($nombrePrograma, $nombreUsuario) {
 
+    $fecha = date("Y-m-d H:i:s");
+    
     try {
-      $sql = "INSERT INTO programa(nombre_programa, usuarioActualiza) VALUES ( :nombre_programa, :usuarioActualiza)";
+      $sql = "INSERT INTO programa(nombre_programa, usuarioActualiza, fechaActualiza) VALUES ( :nombre_programa, :usuarioActualiza, :fechaActualiza)";
 
       $stmt = $this->conexRubrica->prepare($sql);
       $stmt->bindParam(':nombre_programa', $nombrePrograma);
       $stmt->bindParam(':usuarioActualiza', $nombreUsuario);
+      $stmt->bindParam(':fechaActualiza', $fecha);
       $stmt->execute();
 
     } catch(PDOException $e) {

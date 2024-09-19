@@ -27,18 +27,18 @@ include "header.php";
           ?>
             <div class="col-md-4">
               <p><strong>Nombre del aspirante:</strong></p>
-              <p><?php echo $rowResult['nombre_estudiante'] ?></p>
+              <p><?php echo htmlspecialchars($rowResult['nombre_estudiante']) ?></p>
             </div>
             <div class="col-12 col-md-4">
               <p><strong>Programa:</strong></p>
-              <p><?php echo $rowResult['nombre_programa'] ?></p>
+              <p><?php echo htmlspecialchars($rowResult['nombre_programa']) ?></p>
             </div>
             <div class="col-12 col-md-4">
               <p><strong>Institución</strong></p>
               <?php if (empty($rowResult['colegio'])) { ?>
-                <p><?php echo $rowResult['universidad'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['universidad']) ?></p>
               <?php } else { ?>
-                <p><?php echo $rowResult['colegio'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['colegio']) ?></p>
               <?php } ?>
             </div>
             <div class="col-12 col-md-4">
@@ -48,9 +48,9 @@ include "header.php";
             <div class="col-12 col-md-8">
               <p><strong>Estudios</strong></p>
               <?php if (empty($rowResult['estudioAdicional'])) { ?>
-                <p><?php echo $rowResult['titulo'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['titulo']) ?></p>
               <?php } else { ?>
-                <p><?php echo $rowResult['estudioAdicional'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['estudioAdicional']) ?></p>
               <?php } ?>
             </div>
         </div>
@@ -60,7 +60,7 @@ include "header.php";
             <?php if (empty($rowResult['obsMadre'])) { ?>
               <p> <i>Solo para programa de medicina</i></p>
             <?php } else { ?>
-              <p><?php echo $rowResult['obsMadre'] ?></p>
+              <p><?php echo htmlspecialchars($rowResult['obsMadre']) ?></p>
             <?php } ?>
           </div>
           <div class="col-12 col-md-4">
@@ -68,7 +68,7 @@ include "header.php";
             <?php if (empty($rowResult['obsPadre'])) { ?>
               <p><i>Solo para programa de medicina</i></p>
             <?php } else { ?>
-              <p><?php echo $rowResult['obsPadre'] ?></p>
+              <p><?php echo htmlspecialchars($rowResult['obsPadre']) ?></p>
             <?php } ?>
           </div>
           <div class="d-none">
@@ -77,7 +77,7 @@ include "header.php";
               <?php if (empty($rowResult['trabaja'])) { ?>
                 <p> <i>Aplica solo para programas posgrado</i></p>
               <?php } else { ?>
-                <p><?php echo $rowResult['trabaja'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['trabaja']) ?></p>
               <?php } ?>
             </div>
             <div class="col-12 col-md-4">
@@ -85,7 +85,7 @@ include "header.php";
               <?php if (empty($rowResult['lugarTrabajo'])) { ?>
                 <p><i>Aplica solo para programas posgrado</i></p>
               <?php } else { ?>
-                <p><?php echo $rowResult['lugarTrabajo'] ?></p>
+                <p><?php echo htmlspecialchars($rowResult['lugarTrabajo']) ?></p>
               <?php } ?>
             </div>
           </div>

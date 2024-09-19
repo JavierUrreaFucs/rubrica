@@ -33,15 +33,17 @@ if (empty($_SESSION['correo'])) {
           <a href="registro.php" class="nav-link py-2 text-nav"><i class="bi bi-clipboard2-plus"></i> 
             <span>Registro</span>
           </a>
-          <a href="usuarios.php" class="nav-link py-2 text-nav"><i class="bi bi-check2-square"></i> 
-            <span>Usuarios</span>
-          </a>
-          <a href="programas.php" class="nav-link py-2 text-nav"><i class="bi bi-book"></i>
-            <span>Programas</span>
-          </a>
-          <a href="reportes.php" class="nav-link py-2 text-nav"><i class="bi bi-bar-chart-line"></i>
-            <span>Reportes</span>
-          </a>
+          <?php if ( $_SESSION['login_id_tipo'] == 1 ) { ?>
+            <a href="usuarios.php" class="nav-link py-2 text-nav"><i class="bi bi-check2-square"></i> 
+              <span>Usuarios</span>
+            </a>
+            <a href="programas.php" class="nav-link py-2 text-nav"><i class="bi bi-book"></i>
+              <span>Programas</span>
+            </a>
+            <a href="reportes.php" class="nav-link py-2 text-nav"><i class="bi bi-bar-chart-line"></i>
+              <span>Reportes</span>
+            </a>
+          <?php } ?>
         </div>
       </div>
     </nav>
@@ -62,15 +64,17 @@ if (empty($_SESSION['correo'])) {
                 <li class="nav-item">
                   <a class="nav-link text-nav" href="registro.php"><i class="bi bi-clipboard2-plus"></i> Registro</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link text-nav" href="usuarios.php"><i class="bi bi-check2-square"></i> Usuarios</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-nav" href="programas.php"><i class="bi bi-book"></i> Programas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-nav" href="reportes.php"><i class="bi bi-bar-chart-line"></i> Reportes</a>
-                </li>
+                <?php if ( $_SESSION['login_id_tipo'] == 1 ) { ?>
+                  <li class="nav-item">
+                    <a class="nav-link text-nav" href="usuarios.php"><i class="bi bi-check2-square"></i> Usuarios</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-nav" href="programas.php"><i class="bi bi-book"></i> Programas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-nav" href="reportes.php"><i class="bi bi-bar-chart-line"></i> Reportes</a>
+                  </li>
+                <?php } ?>
               </ul>
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0 px-2">
                 <li class="nav-item dropdown">
@@ -78,7 +82,7 @@ if (empty($_SESSION['correo'])) {
                     Menú
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end menu-bg">
-                    <li><a class="dropdown-item menu-bg" href="#">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item menu-bg" href="password.php">Cambiar contraseña</a></li>
                     <li><a class="dropdown-item menu-bg" href="logout.php">Cerrar Sesión</a></li>
                   </ul>
                 </li>

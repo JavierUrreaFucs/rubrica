@@ -2,7 +2,7 @@
   session_start();
   if (isset($_SESSION['correo'])) {
     // El usuario ya ha iniciado sesión, redirige a la página principal u otra página
-    header('Location: ../views/rubrica.php');
+    header('Location: ../views/aspirantes.php');
     exit();
   }
 ?>

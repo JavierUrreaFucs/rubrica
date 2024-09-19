@@ -28,9 +28,11 @@ class Rubrica
    */
   public function insertarRubrica($idEstudiante, $documentoEstudiante, $puntajeICFES, $fechaEntrevista, $historiaAcademica, $aspectosVocacionales, $conocimientoFUCS, $inAcGenerales, $expOralComprension, $comportamiento, $observacion, $calificaICFES, $totalEntre, $totalCalifica, $creoEntrevista) {
 
-    $sql = "INSERT INTO rubrica(id_estudiante, documentoEstudiante, puntajeICFES, fechaEntrevista, historiaAcademica, aspectosVocacionales, conocimientoFUCS, inAcGenerales, expOralComprension, comportamiento, observacion, calificaICFES, totalEntre, totalAdmision, creoEntrevista ) VALUES (:id_estudiante, :documentoEstudiante, :puntajeICFES, :fechaEntrevista, :historiaAcademica, :aspectosVocacionales, :conocimientoFUCS, :inAcGenerales, :expOralComprension, :comportamiento, :observacion, :calificaICFES, :totalEntre, :totalAdmision, :creoEntrevista );";
+    $fecha = date("Y-m-d H:i:s");
 
     try {
+      $sql = "INSERT INTO rubrica(id_estudiante, documentoEstudiante, puntajeICFES, fechaEntrevista, historiaAcademica, aspectosVocacionales, conocimientoFUCS, inAcGenerales, expOralComprension, comportamiento, observacion, calificaICFES, totalEntre, totalAdmision, creoEntrevista, fechaActualizacion ) VALUES (:id_estudiante, :documentoEstudiante, :puntajeICFES, :fechaEntrevista, :historiaAcademica, :aspectosVocacionales, :conocimientoFUCS, :inAcGenerales, :expOralComprension, :comportamiento, :observacion, :calificaICFES, :totalEntre, :totalAdmision, :creoEntrevista, :fechaActualizacion );";
+
       $stmt = $this->conexRubrica->prepare($sql);
       $stmt->bindParam(':id_estudiante', $idEstudiante);
       $stmt->bindParam(':documentoEstudiante', $documentoEstudiante);
@@ -47,6 +49,7 @@ class Rubrica
       $stmt->bindParam(':totalEntre', $totalEntre);
       $stmt->bindParam(':totalAdmision', $totalCalifica);
       $stmt->bindParam(':creoEntrevista', $creoEntrevista);
+      $stmt->bindParam(':fechaActualizacion', $fecha);
       $stmt->execute();
       return true;
     } catch (PDOException $e) {
@@ -102,23 +105,6 @@ class Rubrica
     }
 }
 
-
-  /**
-   * Actualizar estado de la rubrica del estudiante
-   */
-  /*public function updateRubricaEstudiante($documento){
-
-    $sql = "UPDATE estudiante SET rubrica = 1 WHERE cedula = :cedula";
-
-    try {
-      $stmt = $this->conexRubrica->prepare($sql);
-      $stmt->bindParam(':cedula', $documento);
-      $stmt->execute();
-      return true;
-    } catch (PDOException $e) {
-      die("Error en la ejecución de la consulta: data0003 " . $e->getMessage());
-    }
-  }*/
   /**
    * Actualizar estado de la rubrica del estudiante
    */

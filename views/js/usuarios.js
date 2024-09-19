@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Agregar el listener a todos los formularios de eliminación
   document.querySelectorAll('.deleteForm').forEach(function(form) {
       form.addEventListener('submit', function(event) {
-          let confirmation = confirm('¿Está seguro de que desea eliminar este usuario?');
+          let confirmation = confirm('¿Está seguro de que desea inactivar este usuario?');
           if (!confirmation) {
               event.preventDefault(); // Evita que el formulario se envíe si el usuario cancela la confirmación
           }

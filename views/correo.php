@@ -24,7 +24,7 @@ class correoManager
       $mail->isSMTP();
       $mail->Host       = 'smtp.gmail.com';  // Servidor SMTP
       $mail->SMTPAuth   = true;
-      $mail->Username   = 'tu_correo@example.com';  // Usuario SMTP
+      $mail->Username   = 'jhurrea@fucsalud.edu.co';  // Usuario SMTP
       $mail->Password   = 'tu_contraseña';  // Contraseña SMTP
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Habilitar encriptación TLS
       $mail->Port       = 587;  // Puerto TCP
@@ -43,11 +43,10 @@ class correoManager
       Una vez ingrese al aplicativo se recomienda cambiar la contraseña.<br><br>
       Cordialmente,
       <b>Admisiones, registro y control</b>';
-      $mail->AltBody = 'Este es el contenido del correo en texto plano.';
 
       // Enviar correo
       $mail->send();
-      echo 'Correo enviado correctamente';
+
     } catch (Exception $e) {
       echo "Error al enviar el correo: {$mail->ErrorInfo}";
     }
@@ -64,15 +63,15 @@ class correoManager
       $mail->Host = 'smtp.gmail.com'; //Especifique los servidores SMTP principales y de respaldo 
       $mail->SMTPAuth = true; // Enable SMTP authentication
       $mail->Username = 'jhurrea@fucsalud.edu.co'; // SMTP username
-      $mail->Password = 'oddj ugog ocax rfdz'; // Habilitar autenticación SMTP    
+      $mail->Password = ''; // Habilitar autenticación SMTP    
       $mail->SMTPSecure = 'tls'; // Habilita el cifrado TLS, `ssl` también aceptó 
       $mail->Port = 587; // puerto TCP para conectarse        
       $mail->setFrom('jhurrea@fucsalud.edu.co');
-      $mail->addAddress($correo1); //leyderesidenciasmedicas@fucsalud.edu.co
+      $mail->addAddress($correo1); 
       $mail->isHTML(true); // Establezca el formato de correo electrónico en HTML
       $mail->CharSet = 'UTF-8';
       $mail->Subject = 'Recuperación contraseña';
-      $body = "Cordial Saludo,<br><br>Usted solicitó un restablecimiento de contraseña a través del aplicativo de Rutas FUCS.<br><br>Hemos proporcionado su nueva contraseña temporal, que podrá utilizar para iniciar sesión en el aplicativo. Una vez que haya iniciado sesión, asegúrese de cambiar esta contraseña temporal por una nueva.<br><br>Nueva contraseña temporal: <strong>" . $numero . "<br><br>Recuerde que es esencial mantener su contraseña segura y no compartirla con nadie.<br><br><strong>No responda a este correo.</strong>";
+      $body = "Cordial Saludo,<br><br>Usted solicitó un restablecimiento de contraseña a través del aplicativo de Rubrica de calificaciones.<br><br>Hemos proporcionado su nueva contraseña temporal, que podrá utilizar para iniciar sesión en el aplicativo. Una vez que haya iniciado sesión, asegúrese de cambiar esta contraseña temporal por una nueva.<br><br>Nueva contraseña temporal: <strong>" . $numero . "<br><br>Recuerde que es esencial mantener su contraseña segura y no compartirla con nadie.<br><br><strong>No responda a este correo.</strong>";
       $mail->Body = $body;
       $mail->send();
     } catch (Exception $e) {

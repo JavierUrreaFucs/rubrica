@@ -38,7 +38,7 @@
                     <button type="submit" class="btn btn-block  btn-primary btncolor" name="registrar">Recuperar</button>
                   </div>
                   <div class="d-grid col-md-6">
-                    <button type="button" class="btn btn-block btn-warning botonamarillo" onclick="goBack()">Atras</button>
+                    <a href="login.php" class="btn btn-block btn-warning botonamarillo">Atras</a>
                   </div>
                 </div>
               </form>

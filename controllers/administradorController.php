@@ -3,6 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 require_once("../models/administradorModel.php");
 
+/**
+ * Administrador de usuarios
+ */
 if (isset($_POST['crearUsuario'])) {
   $nombreUsuario = $_POST['nombreUsuario'];
   $correoUsuario = $_POST['correoUsuario'];
@@ -14,6 +17,22 @@ if (isset($_POST['crearUsuario'])) {
   echo '<script>document.location.href="../s/usuarios.php"</script>';
 }
 
+// Editar usuario
+else if (isset($_POST['editarUsuario'])) {
+
+  $nombreUsuario = $_POST['nombreUsuario'];
+  $correo = $_POST['correoUsuario'];
+  $idLogin = $_POST['idLogin'];
+
+  $actualiza = new Administrador();
+  $actualiza->editUsuario($nombreUsuario, $correo, $idLogin);
+
+  echo '<script language="javascript">alert("Datos del usuario actualizados correctamente.")</script>';
+  echo '<script>document.location.href="../views/usuarios.php"</script>';
+
+}
+
+// Cambio de estado
 else if (isset($_POST['cambioUsuario'])) {
 
   $idLogin = $_POST['id_login'];
@@ -32,6 +51,9 @@ else if (isset($_POST['cambioUsuario'])) {
 
 }
 
+/**
+ * Administrador de programas
+ */
 else if (isset($_POST['crearPrograma'])) {
   $nombrePrograma = $_POST['nombrePrograma'];
   $nombreusuario = $_POST['usuario'];

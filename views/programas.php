@@ -5,7 +5,7 @@ require("../controllers/administradorController.php");
 include "header.php";
 ?>
 
-<main class="main-div"> 
+<main> 
 
   <div class="container-fluid bg-white rounded py-2">
     <h1 class="px-3">Lista de programas</h1>
@@ -109,7 +109,7 @@ include "header.php";
             <div class="mb-3">
               <label for="nombreUsuario" class="form-label">Nombre del programa: <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
-              <input type="hidden" name="usuario" value="<?php echo $_SESSION['nombre_login'] ?>">
+              <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($_SESSION['nombre_login']) ?>">
             </div>
         </div>
         <div class="modal-footer">

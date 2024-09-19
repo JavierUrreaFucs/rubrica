@@ -22,7 +22,7 @@ include "header.php";
                 $tipoProg = new Aspirante();
                 $tipoProgramas = $tipoProg->selectTipoPrograma();
                 foreach ($tipoProgramas as $tipoPrograma) {
-                  echo '<option value="' . $tipoPrograma['idTipoProg'] . '">' . $tipoPrograma['nombreTipoProg'] . '</option>';
+                  echo '<option value="' . $tipoPrograma['idTipoProg'] . '">' . htmlspecialchars($tipoPrograma['nombreTipoProg']) . '</option>';
                 }
                 ?>
               </select>

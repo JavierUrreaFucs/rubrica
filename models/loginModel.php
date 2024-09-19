@@ -42,7 +42,7 @@ class Consultas
         echo '<script language="javascript">alert("Credenciales incorrectas");</script>';
         echo '<script>document.location.href="../views/login.php"</script>';
     } else {
-        // Recorrer los resultados
+        // Recorrer los resultados 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $this->resultado[] = $row;
             // Compara la contraseña insertada con la encriptada en la base de datos
@@ -119,6 +119,28 @@ class Consultas
     } else {
         echo '<script language="javascript">alert("Los campos indicados no son iguales, intente nuevamente.");</script>';
     }
+  }
+
+  // Cambiar contraseña
+  public function cambiarPassword($correo, $passwordNew) {
+
+    $password = password_hash($passwordNew, PASSWORD_DEFAULT);
+    $fecha = date("Y-m-d H:i:s");
+    $cambiaPass = 0;
+
+    try {
+      $sql = "UPDATE login SET password = :password, fecha_actualizacion_login = :fecha, cambia_pass = :cambiaPass WHERE  correo = :correo ";
+
+      $stmt = $this->conex->prepare($sql);
+      $stmt->bindParam(':password', $password);
+      $stmt->bindParam(':fecha', $fecha);
+      $stmt->bindParam(':cambiaPass', $cambiaPass);
+      $stmt->bindParam(':correo', $correo);
+      $stmt->execute();
+    } catch(PDOException $e) {
+      die("Error en la ejecución de la consulta: ".$e->getMessage());
+    }
+
   }
 
 }

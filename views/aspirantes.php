@@ -72,7 +72,7 @@ include "header.php";
                     ?>
                       <form action="rubrica.php" method="GET" target="_blank">
                         <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
-                        <input type="hidden" name="nombre" value="<?php echo $rowAspirante['nombre_estudiante'] ?>" readonly>
+                        <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($rowAspirante['nombre_estudiante']) ?>" readonly>
                         <div class="d-grid gap-2">
                           <input type="submit" class="btn btn-warning btn-sm" name="realizarRubrica" value="Realizar entrevista">
                         </div>
@@ -81,12 +81,12 @@ include "header.php";
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <form action="rubrica.php" method="GET" target="_blank">
                           <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
-                          <input type="hidden" name="nombre" value="<?php echo $rowAspirante['nombre_estudiante'] ?>" readonly>
-                          <button type="submit" class="btn btn-primary btn-sm" name="realizarRubrica">Realizar entrevista</button>
+                          <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($rowAspirante['nombre_estudiante']) ?>" readonly>
+                          <button type="submit" class="btn btn-outline-primary btn-sm" name="realizarRubrica">Realizar entrevista</button>
                         </form>
                         <form action="verRubrica.php" method="GET">
-                          <input type="hidden" name="cedula" value="<?php echo $rowAspirante['cedula'] ?>" readonly>
-                          <button type="submit" class="btn btn-success btn-sm" name="verRubrica">Ver Rubrica</button>
+                          <input type="hidden" name="cedula" value="<?php echo htmlspecialchars($rowAspirante['cedula']) ?>" readonly>
+                          <button type="submit" class="btn btn-outline-success btn-sm" name="verRubrica">Ver Rubrica</button>
                         </form>
                       </div>
                     <?php } else { ?>
