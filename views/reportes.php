@@ -32,7 +32,7 @@ include "header.php";
               <input type="text" class="form-control" id="nombre" name="nombre">
             </div>
             <div class="col-6 col-md-2">
-              <input type="submit" class="btn btn-outline-primary mt-4" name="reporte" value="Descargar Reporte">
+              <input type="submit" class="btn btn-outline-primary mt-4" name="reporte" value="Descargar">
             </div>
           </div>
         </form>

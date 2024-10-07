@@ -1,10 +1,8 @@
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  background: #F0F0F0;
 }
 
 main {
@@ -45,11 +43,12 @@ input[type=number] { -moz-appearance:textfield; }
 
 .d-flex {
   display: flex;
+  height: 100%;
 }
 
 #sidebarMenu {
   position: fixed;
-  width: 15%;
+  min-width: 15%;
   background-color: #0A2655;
   height: 100%;
   z-index: 2;
@@ -103,6 +102,9 @@ input[type=number] { -moz-appearance:textfield; }
   color: #FAD785;
 }
 
+.img-logo {
+  width: 140px;
+}
 /* end Navbar */
 
 /* main */
@@ -141,11 +143,11 @@ input[type=number] { -moz-appearance:textfield; }
 /* end login */
 
 @media screen and (min-width: 768px) {
-  /*.container-desktop {
+  .container-desktop {
     padding-left: 15%;
     width: 100%;
     height: 100%;
-  }*/
+  }
 
   .layaout-user {
     height: 100% !important;
@@ -155,27 +157,12 @@ input[type=number] { -moz-appearance:textfield; }
     color: #0A2655;
   }
 
-  main{
-    flex: 1;
-    height: 100%;
-    width: 85%;
-    float: right;
+  .main-div{
+    height: 100vh;
   }
 
   .menu-bg{
     background-color: #FFFFFF;
     color: #0A2655;
-  }
-
-  .d-nav {
-    width: 85%;
-    float: right;
-    padding: 0px;
-  }
-
-  .footer {
-    width: 85%;
-    margin-left: 15%;
-    margin-top: 2.5%;
   }
 }

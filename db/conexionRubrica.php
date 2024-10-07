@@ -11,7 +11,7 @@ class ConexionRubrica {
     $this->servername = "localhost";
     $this->username = "root";
     $this->password = "";
-    $this->dbname = "rubrica";
+    $this->dbname = "rubrica2";
     $this->conectar();
   }
 

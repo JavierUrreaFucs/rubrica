@@ -12,6 +12,9 @@ if (empty($_SESSION['correo'])) {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -26,7 +29,9 @@ if (empty($_SESSION['correo'])) {
     <nav id="sidebarMenu" class="collapse d-md-block sidebar collapse">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a class="navbar-brand pb-5 text-nav" href="aspirantes.php"><img class="img-fluid img-logo" src="assets/img/LOGO-FUCS-fondo-Azul-Fundadores.png" alt="logo-fucs"></a>
+          <div class="pb-5">
+            <a class="navbar-brand pb-5 text-nav" href="aspirantes.php"><img class="img-fluid" src="assets/img/LOGO-FUCS-fondo-Azul-Fundadores.png" alt="logo-fucs"></a>
+          </div>
           <a href="aspirantes.php" class="nav-link py-2 text-nav" aria-current="true"><i class="bi bi-house-door"></i> 
             <span>Inicio</span>
           </a>
@@ -50,7 +55,7 @@ if (empty($_SESSION['correo'])) {
 
     <div class="container-fluid container-desktop">
       <header>
-        <nav class="navbar navbar-expand-lg menu-bg text-white">
+        <nav class="navbar navbar-expand-lg menu-bg text-white d-nav">
           <div class="container-fluid px-2">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

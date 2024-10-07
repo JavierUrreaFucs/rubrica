@@ -26,7 +26,7 @@ include "header.php";
           </div>
         </form>
       </div>
-      <div class="container">
+      <div class="container-fluid">
         <div class="table-responsive">
           <table class="table table-bordered px-2" id="myTable">
             <thead>
