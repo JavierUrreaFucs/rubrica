@@ -37,6 +37,11 @@ class Administrador {
       $stmt->bindParam(':fecha_ultimo_ingreso', $fecha1);
       $stmt->execute();
 
+      // Enviar correo con credenciales
+      require_once("../views/correo.php");
+      $query = new CorreoManager();
+      $datos = $query->correoUsuario($correoUsuario);
+
     } catch(PDOException $e) {
       die("Error en la ejecución de la consulta: ".$e->getMessage());
     }

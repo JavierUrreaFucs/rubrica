@@ -107,8 +107,8 @@ include "header.php";
         <div class="modal-body">
           <form action="../controllers/administradorController.php" method="post">
             <div class="mb-3">
-              <label for="nombreUsuario" class="form-label">Nombre del programa: <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+              <label for="nombrePrograma" class="form-label">Nombre del programa: <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="nombrePrograma" name="nombrePrograma" required>
               <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($_SESSION['nombre_login']) ?>">
             </div>
         </div>

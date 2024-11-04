@@ -83,31 +83,34 @@ class Consultas
 
         $activo = 1;
         // Realizar una consulta para obtener los datos del usuario
-        $query1 = "SELECT * FROM login WHERE correo = ? AND activo_login = ?";
+        $query1 = "SELECT * FROM login WHERE correo = :correo AND activo_login = :activo_login";
         $stmt = $this->conex->prepare($query1);
-        $stmt->bind_param('si', $correo1, $activo);
+        $stmt->bindParam(':correo', $correo1);
+        $stmt->bindParam(':activo_login', $activo);
         $stmt->execute();
-        $resConsulta = $stmt->get_result();
+        $resConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Verificar si la consulta no devuelve ningún resultado.
-        if ($resConsulta->num_rows > 0) {
+        if (count($resConsulta) > 0) {
             // Generar una nueva contraseña segura
-            $numero = random_bytes(8); // Puedes ajustar la longitud según tus necesidades
+            $numero = "fucsalud123*"; // Puedes ajustar la longitud según tus necesidades
             $contrasenia = password_hash($numero, PASSWORD_DEFAULT);
 
             // Actualizar el campo de la contraseña en la base de datos
-            $query2 = "UPDATE login SET password = ? WHERE correo = ? AND activo_login = ?";
+            $query2 = "UPDATE login SET password = :password, cambia_pass = :cambia_pass WHERE correo = :correo AND activo_login = :activo_login";
             $stmt2 = $this->conex->prepare($query2);
-            $stmt2->bind_param('ssi', $contrasenia, $correo1, $activo);
+            $stmt2->bindParam(':password', $contrasenia);
+            $stmt2->bindParam(':cambia_pass', $activo);
+            $stmt2->bindParam(':correo', $correo1);
+            $stmt2->bindParam(':activo_login', $activo);
             $stmt2->execute();
             if (!$stmt2) {
               throw new Exception("Error al preparar la consulta de actualización de contraseña: " . $this->conex->error);
           }
-            $stmt2->close();
 
             // Enviar correo de recuperación
-            require_once("../view/correo.php");
-            $query = new CorreoManager();
+            require_once("../views/correo.php");
+            $query = new correoManager();
             $datos = $query->recuperacionpass($numero, $correo1);
 
             echo '<script language="javascript">alert("Se envió la nueva contraseña a su correo.");</script>';
@@ -115,7 +118,6 @@ class Consultas
             echo '<script language="javascript">alert("El correo informado no está disponible en la base de datos, informe al administrador del sistema.");</script>';
         }
 
-        $stmt->close();
     } else {
         echo '<script language="javascript">alert("Los campos indicados no son iguales, intente nuevamente.");</script>';
     }

@@ -112,7 +112,7 @@ input[type=number] { -moz-appearance:textfield; }
 /* end main */
 
 .main-div{
-  height: 100vh;
+  height: 100%;
 }
 
 /* footer */

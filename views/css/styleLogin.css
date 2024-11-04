@@ -1,3 +1,7 @@
+h1 {
+  color: #0A2655;
+}
+
 .fondo {
   background-color: rgb(220, 220, 220);
 }
@@ -111,4 +115,20 @@
 .card-registro {
   border-radius: 25px !important;
   opacity: 95% !important;
+}
+
+/* footer */
+.footer {
+  background-color: #000000;
+  text-align: center;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+}
+/* end footer */
+
+@media screen and (min-width: 768px ) {
+  h1{
+    font-size: 50px;
+  }
 }

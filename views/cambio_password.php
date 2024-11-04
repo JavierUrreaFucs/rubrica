@@ -26,7 +26,7 @@
             </div>
             <div class="card-body">
               <h4 class="py-3">Recuperación de contraseña</h4>
-              <form class="m-t p-2" role="form" action="../controller/controlador_sesiones.php" method="POST">
+              <form class="m-t p-2" role="form" action="../controllers/loginController.php" method="POST">
                 <div class="form-group py-2">
                   <input type="email" name="correo1" class="form-control p-2" placeholder="Correo electrónico" required="">
                 </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                   <div class="d-grid col-md-6">
-                    <button type="submit" class="btn btn-block  btn-primary btncolor" name="registrar">Recuperar</button>
+                    <button type="submit" class="btn btn-block  btn-primary btncolor" name="recuperarcontrasenia">Recuperar</button>
                   </div>
                   <div class="d-grid col-md-6">
                     <a href="login.php" class="btn btn-block btn-warning botonamarillo">Atras</a>

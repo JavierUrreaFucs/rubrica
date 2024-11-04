@@ -3,7 +3,7 @@ require('../models/aspiranteModel.php');
 include "header.php";
 ?>
 
-<main class="main-div"> 
+<main>
   <div class="container-fluid bg-white rounded">
     <!-- Fila 0 -->
     <div class="col-12 p-3">
@@ -110,7 +110,17 @@ include "header.php";
                   </div>
                   <div class="col-12 col-md-3 py-2">
                     <label for="anioGrado" class="form-label">Año de graduación</label>
-                    <input type="date" class="form-control" id="anioGrado" name="anioGrado" placeholder="Seleccione una fecha">
+                    <select class="form-select" id="anioGrado" name="anioGrado">
+                      <option value="">Seleccione una opción...</option>
+                      <?php 
+                      $currentYear = date("Y");
+                      $startYear = 1945; // Puedes ajustar este valor según tus necesidades
+                    
+                      for ($year = $currentYear; $year >= $startYear; $year--) {
+                          echo "<option value='$year'>$year</option>";
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="col-12 col-md-4 py-2">
                     <label for="trabaja" class="form-label">¿Labora actualmente?</label>
@@ -161,7 +171,7 @@ include "header.php";
       <div class="col-12 col-md-6">
         <form action="../controllers/procesar_excel.php" method="post" enctype="multipart/form-data">
           <div class="input-group">
-            <input type="file" class="form-control" name="archivo_excel">
+            <input type="file" class="form-control" name="archivo_excel" required>
             <input class="btn btn-outline-primary" type="submit" value="Subir archivo">
           </div>
         </form>

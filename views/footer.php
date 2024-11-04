@@ -4,7 +4,7 @@
       
 </div>
 </div>
-<footer class="footer">
+<footer class="footer fixed-bottom">
   <span class="text-light">Sistema Rubrica de Calificaciones | <i class="bi bi-c-circle"></i> FUCS <?php echo date('Y')?> Todos los derechos reservados | Desarrollado por la DDT</span>
 </footer>
 

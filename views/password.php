@@ -21,10 +21,10 @@
         <div class="clearfix"> </div>
       </div>
       <div class="form-group py-2">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12">Ingrese la nueva contraseña: <b style="color:red;">*</b></label>
+        <label class="control-label col-12">Ingrese la nueva contraseña: <b style="color:red;">*</b> <br><i>(La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula y un número)</i></label>
         <div class="col-md-8">
-          <div class="">
-            <input type="password" class="form-control col-md-7 col-xs-12" name="pass1" required >
+          <div class="col-12">
+            <input type="password" class="form-control col-md-7 col-xs-12" name="pass1" minlength="8" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula y un número" required>
           </div>
         </div>
         <div class="clearfix"> </div>
@@ -32,8 +32,8 @@
       <div class="form-group py-2">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Confirme la nueva contraseña: <b style="color:red;">*</b></label>
         <div class="col-md-8">
-          <div class="">
-            <input type="password" class="form-control col-md-7 col-xs-12" name="pass2" required >
+          <div class="col-12">
+            <input type="password" class="form-control col-md-7 col-xs-12" name="pass2" minlength="8" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula y un número" required >
           </div>
         </div>
         <div class="clearfix"> </div>

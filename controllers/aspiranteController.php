@@ -25,7 +25,7 @@ if (isset($_POST['insertarEstudiante'])) {
 
     echo '<script>
       window.alert("Los datos del aspirante se guardaron correctamente.");
-      window.location.href = "../views/index.php";
+      window.location.href = "../views/aspirantes.php";
     </script>';
 
   } else {

@@ -27,8 +27,8 @@
         <div class="col-md-6">
           <div class="card p-3 bordes-login">
             <div class="card-header card-login-bg">
-              <img class="img-login p-2" src="./assets/img/LOGO-FUCS.png" alt="Logo fucs">
-              <!--h4 class="text-center">Iniciar sesión</h4-->
+              <img class="img-login p-2 w-75" src="./assets/img/LOGO-FUCS.png" alt="Logo fucs">
+              <h1 class="text-center pt-4">Rubrica de Entrevista</h1>
             </div>
             <div class="card-body">
               <!-- Formulario de inicio de sesión -->
@@ -59,4 +59,8 @@
       </div>
     </div>
   </main>
-  <?php include('footer.php') ?>
+  <footer class="footer fixed-bottom">
+  <span class="text-light">Sistema Rubrica de Entrevistas | &copy; FUCS <?php echo date('Y')?> Todos los derechos reservados | Desarrollado por la DDT</span>
+  </footer>
+</body>
+</html>

@@ -8,7 +8,7 @@ include "header.php";
       <h1 class="h1">Reportes</h1>
       <hr>
       <div class="py-3 p-md-3">
-        <form method="POST" action="../controllers/reportes.php">
+        <form method="POST" action="../controllers/reporteController.php">
           <div class="row">
             <div class="col-6 col-md-2">
             <label for="estado">Estado:</label>

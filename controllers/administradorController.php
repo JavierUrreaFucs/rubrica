@@ -14,7 +14,7 @@ if (isset($_POST['crearUsuario'])) {
   $insertarUsuario = $insertar->crearUsuario($nombreUsuario, $correoUsuario);
 
   echo '<script language="javascript">alert("Se ha registrado con exito")</script>';
-  echo '<script>document.location.href="../s/usuarios.php"</script>';
+  echo '<script>document.location.href="../views/usuarios.php"</script>';
 }
 
 // Editar usuario
@@ -62,5 +62,5 @@ else if (isset($_POST['crearPrograma'])) {
   $insertarPrograma = $insertar->crearPrograma($nombrePrograma, $nombreUsuario);
 
   echo '<script language="javascript">alert("Se creo el nuevo programa con exito.")</script>';
-  echo '<script>document.location.href="../s/programas.php"</script>';
+  echo '<script>document.location.href="../views/programas.php"</script>';
 }
