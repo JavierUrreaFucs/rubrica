@@ -25,13 +25,13 @@ class correoManager
       $mail->isSMTP();
       $mail->Host       = 'smtp.gmail.com';  // Servidor SMTP
       $mail->SMTPAuth   = true;
-      $mail->Username   = 'legalizacion.matricula@fucsalud.edu.co';  // Usuario SMTP
-      $mail->Password   = 'insb bnde slru bfyh';  // Contraseña SMTP
+      $mail->Username   = '';  // Usuario SMTP
+      $mail->Password   = '';  // Contraseña SMTP
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Habilitar encriptación TLS
       $mail->Port       = 587;  // Puerto TCP
 
       // Remitente y destinatarios
-      $mail->setFrom('legalizacion.matricula@fucsalud.edu.co');
+      $mail->setFrom('');
       $mail->addAddress($correo);  // Añadir destinatario
 
       // Contenido del correo
@@ -63,11 +63,11 @@ class correoManager
       $mail->isSMTP(); // Configure el remitente para usar SMTP 
       $mail->Host = 'smtp.gmail.com'; //Especifique los servidores SMTP principales y de respaldo 
       $mail->SMTPAuth = true; // Enable SMTP authentication
-      $mail->Username = 'legalizacion.matricula@fucsalud.edu.co'; // SMTP username
-      $mail->Password = 'insb bnde slru bfyh'; // Habilitar autenticación SMTP    
+      $mail->Username = ''; // SMTP username
+      $mail->Password = ''; // Habilitar autenticación SMTP    
       $mail->SMTPSecure = 'tls'; // Habilita el cifrado TLS, `ssl` también aceptó 
       $mail->Port = 587; // puerto TCP para conectarse        
-      $mail->setFrom('legalizacion.matricula@fucsalud.edu.co');
+      $mail->setFrom('');
       $mail->addAddress($correo1); 
       $mail->isHTML(true); // Establezca el formato de correo electrónico en HTML
       $mail->CharSet = 'UTF-8';
